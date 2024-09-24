@@ -19,51 +19,26 @@ public class Login {
         return password.length() >= 8 && password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$");
     }
 
-    /* 
-    public void registerUser(String name, String lastName, String username, String password) {
-
-        System.out.println("********************************* REGISTER *******************************");
-        System.out.println(" ");
-    
+    // Method to register user with parameters
+    public String registerUser(String name, String lastName, String username, String password) {
         if (!checkUsername(username)) {
-            System.out.println("Username must: be at least 5 characters long and must contain an underscore.");
-            return;
+            return "Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length.";
         }
-    
+
         if (!checkPasswordComplexity(password)) {
-            System.out.println("Password must: be 8 characters long, start with capital letter, contain a number and special character.");
-            return;
+            return "Password is not correctly formatted, please ensure that the password contains at least 8 characters, a capital letter, a number and a special character.";
         }
-    
+
         this.username = username;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
-    
-        System.out.println(" ");
-        System.out.println("Registration successful. Welcome " + this.name + " " + this.lastName);
-        System.out.println("**************************************************************************");
-        System.out.println(" ");
-    }
-    
-    public void loginUser(String username, String password) {
-        System.out.println("******************************** LOGIN **********************************");
-    
-        if (this.username.equals(username) && this.password.equals(password)) {
-            loginStatus = true;
-            System.out.println("Login successful. Welcome " + this.username);
-        } else {
-            loginStatus = false;
-            System.out.println("Invalid username or password. Try again");
-        }
-    
-        System.out.println("*************************************************************************");
-    }
-    */
 
-    // Register a new user
+        return "User successfully registered!";
+    }
+
+    // Interactive method for registering the user
     public void registerUser() {
-
         System.out.println("********************************* REGISTER *******************************");
         System.out.println(" ");
 
@@ -83,7 +58,7 @@ public class Login {
         System.out.print("Enter password: ");
         String password = input.next();
         if (!checkPasswordComplexity(password)) {
-            System.out.println("Password must: be 8 characters long, start with capiatal letter, contain a number and special character");
+            System.out.println("Password must: be 8 characters long, start with a capital letter, contain a number and special character");
             return;
         }
 
@@ -98,9 +73,19 @@ public class Login {
         System.out.println(" ");
     }
 
-    // User login
-    public void loginUser() {
+    // Method to log in user with parameters
+    public boolean loginUser(String username, String password) {
+        if (this.username.equals(username) && this.password.equals(password)) {
+            loginStatus = true;
+            return true;
+        } else {
+            loginStatus = false;
+            return false;
+        }
+    }
 
+    // Method for logging in the user
+    public void loginUser() {
         System.out.println("******************************** LOGIN **********************************");
         System.out.print("Enter username: ");
         String username = input.next();

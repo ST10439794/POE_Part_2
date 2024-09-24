@@ -13,7 +13,7 @@ public class RegistrationandLogin {
 
     public static void main(String[] args) {
         Login login = new Login();
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
         while (true) {
             System.out.println("1. Register");
@@ -21,8 +21,8 @@ public class RegistrationandLogin {
             System.out.println("3. Check Login Status");
             System.out.println("4. Exit");
             System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            int choice = input.nextInt();
+            input.nextLine();  // Consume newline
 
             switch (choice) {
                 case 1:
