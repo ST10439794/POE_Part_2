@@ -15,7 +15,7 @@ public class LoginTest {
 
     @Test
     public void testCheckUsername_Valid() {
-        assertTrue(loginSystem.checkUsername("user_1"), "Username should be valid");
+        assertTrue(loginSystem.checkUsername("Ree_7"), "Username should be valid");
     }
 
     @Test
@@ -55,14 +55,14 @@ public class LoginTest {
     
     @Test
     public void testRegisterUser_Valid() {
-        loginSystem.registerUser("John", "Doe", "user_1", "Password1!");
-        assertEquals("user_1", loginSystem.returnLoginStatus(), "User should be successfully registered");
+        loginSystem.registerUser("John", "Doe", "Ree_7", "Password1!");
+        assertEquals("Ree_7", loginSystem.returnLoginStatus(), "User should be successfully registered");
     }
 
     @Test
     public void testLoginUser_Valid() {
-        loginSystem.registerUser("John", "Doe", "user_1", "Password1!");
-        boolean result = loginSystem.loginUser("user_1", "Password1!");
+        loginSystem.registerUser("John", "Doe", "Ree_7", "Password1!");
+        boolean result = loginSystem.loginUser("Ree_7", "Password1!");
         assertTrue(result, "Login should be successful with valid credentials");
     }
 
@@ -75,8 +75,8 @@ public class LoginTest {
 
     @Test
     public void testLoginUser_InvalidPassword() {
-        loginSystem.registerUser("John", "Doe", "user_1", "Password1!");
-        boolean result = loginSystem.loginUser("user_1", "wrong_password");
+        loginSystem.registerUser("John", "Doe", "Ree_7", "Password1!");
+        boolean result = loginSystem.loginUser("Ree_7", "wrong_password");
         assertFalse(result, "Login should fail with invalid password");
     }
 }
