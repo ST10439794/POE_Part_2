@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.yourcompany.yourproject.RegistrationandLoginTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.874 s -- in org.yourcompany.yourproject.RegistrationandLoginTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.869 s -- in org.yourcompany.yourproject.RegistrationandLoginTest
