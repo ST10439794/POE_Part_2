@@ -10,11 +10,11 @@ public class KhanbanTasks {
     private int totalHours = 0; // Total duration of all tasks
 
     /**
-     * Method to start the Kanban Task management process.
+     * Method to start the Khanban Task management process.
      * Displays a menu to the user and handles task-related operations.
      */
     public void manageTasks() {
-        String welcomeMessage = "Welcome to EasyKanban";
+        String welcomeMessage = "Welcome to EasyKhanban";
         JOptionPane.showMessageDialog(null, welcomeMessage);
 
         int option;

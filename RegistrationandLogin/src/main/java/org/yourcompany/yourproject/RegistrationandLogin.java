@@ -13,7 +13,7 @@ public class RegistrationandLogin {
     public static void main(String[] args) {
         // Create a Login object to handle user registration and login
         Login login = new Login();
-        KhanbanTasks khanbanTasks = new KhanbanTasks(); // Create a KanbanTasks object to manage tasks
+        KhanbanTasks khanbanTasks = new KhanbanTasks(); // Create a KhanbanTasks object to manage tasks
 
         // Loop to continuously display the main menu until the user chooses to exit
         while (true) {
