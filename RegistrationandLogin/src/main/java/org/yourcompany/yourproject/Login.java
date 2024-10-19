@@ -1,110 +1,95 @@
 package org.yourcompany.yourproject;
-import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class Login {
+    // Variables to store user details and login status
     private String username;
     private String password;
     private String name;
     private String lastName;
     private boolean loginStatus = false;
-    private Scanner input = new Scanner(System.in);
 
-    // Check if the username meets the criteria
+    /**
+     * Method to check if the username meets the required format.
+     * @param username The username entered by the user.
+     * @return True if the username contains an underscore and is no more than 5 characters.
+     */
     public boolean checkUsername(String username) {
         return username.length() <= 5 && username.contains("_");
     }
 
-    // Check if the password meets the complexity requirements
+    /**
+     * Method to check if the password meets the complexity requirements.
+     * @param password The password entered by the user.
+     * @return True if the password is at least 8 characters long and contains a capital letter, a number, and a special character.
+     */
     public boolean checkPasswordComplexity(String password) {
         return password.length() >= 8 && password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$");
     }
 
-    // Method to register user with parameters
-    public String registerUser(String name, String lastName, String username, String password) {
-        if (!checkUsername(username)) {
+    /**
+     * Method to register a user, checking username and password format.
+     * @return A message indicating the result of the registration.
+     */
+    public String registerUser(String userName, String userLastName, String userUsername, String userPassword) {
+        // Check username
+        if (!checkUsername(userUsername)) {
             return "Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length.";
         }
 
-        if (!checkPasswordComplexity(password)) {
+        // Check password
+        if (!checkPasswordComplexity(userPassword)) {
             return "Password is not correctly formatted, please ensure that the password contains at least 8 characters, a capital letter, a number and a special character.";
         }
 
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.lastName = lastName;
+        // Store user information if the registration is successful
+        this.username = userUsername;
+        this.password = userPassword;
+        this.name = userName;
+        this.lastName = userLastName;
 
         return "User successfully registered!";
     }
 
-    // Interactive method for registering the user
-    public void registerUser() {
-        System.out.println("********************************* REGISTER *******************************");
-        System.out.println(" ");
-
-        System.out.print("Enter your name: ");
-        String name = input.next();
-
-        System.out.print("Enter your surname: ");
-        String lastName = input.next();
-
-        System.out.print("Enter username: ");
-        String username = input.next();
-        if (!checkUsername(username)) {
-            System.out.println("Username must: be at least 5 characters long and must contain an underscore.");
-            return;
-        }
-
-        System.out.print("Enter password: ");
-        String password = input.next();
-        if (!checkPasswordComplexity(password)) {
-            System.out.println("Password must: be 8 characters long, start with a capital letter, contain a number and special character");
-            return;
-        }
-
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.lastName = lastName;
-
-        System.out.println(" ");
-        System.out.println("Registration successful. Welcome " + this.name + " " + this.lastName);
-        System.out.println("**************************************************************************");
-        System.out.println(" ");
-    }
-
-    // Method to log in user with parameters
-    public boolean loginUser(String username, String password) {
-        if (this.username.equals(username) && this.password.equals(password)) {
+    /**
+     * Method to log in the user interactively using JOptionPane, checking their credentials.
+     */
+    public boolean loginUser(String enteredUsername, String enteredPassword) {
+        // Check if the entered username and password match the registered credentials
+        if (this.username.equals(enteredUsername) && this.password.equals(enteredPassword)) {
             loginStatus = true;
+            JOptionPane.showMessageDialog(null, "Login successful. Welcome, " + this.username, "Success", JOptionPane.INFORMATION_MESSAGE);
             return true;
         } else {
             loginStatus = false;
+            JOptionPane.showMessageDialog(null, "Invalid username or password. Please try again.", "Login Failed", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
 
-    // Method for logging in the user
-    public void loginUser() {
-        System.out.println("******************************** LOGIN **********************************");
-        System.out.print("Enter username: ");
-        String username = input.next();
-        System.out.print("Enter password: ");
-        String password = input.next();
-
-        if (this.username.equals(username) && this.password.equals(password)) {
-            loginStatus = true;
-            System.out.println("Login successful. Welcome " + this.username);
-        } else {
-            loginStatus = false;
-            System.out.println("Invalid username or password. Try again");
-        }
-        System.out.println(" ");
-        System.out.println("*************************************************************************");
-    }
-
-    // Return the login status
+    /**
+     * Method to return the current login status.
+     * @return True if the user is logged in, otherwise false.
+     */
     public boolean returnLoginStatus() {
         return loginStatus;
+    }
+
+    // Getter methods for testing
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }

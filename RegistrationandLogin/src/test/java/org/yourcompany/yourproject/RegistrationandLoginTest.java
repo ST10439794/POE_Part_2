@@ -1,16 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 package org.yourcompany.yourproject;
 
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class RegistrationandLoginTest {
-    
+
     private Login login;
 
     @BeforeEach
@@ -44,74 +42,44 @@ public class RegistrationandLoginTest {
         assertFalse(login.checkPasswordComplexity("Password"), "Expected invalid password as it lacks a special character and number.");
     }
 
-    /**
-     * Test the registerUser() method with valid inputs.
-     */
     @Test
-    public void testRegisterUserValid() {
-        String result = login.registerUser("John", "Doe", "user_", "Passw0rd!");
-        assertEquals("User successfully registered!", result, "Expected successful registration with valid inputs.");
+    public void testRegisterUserWithInvalidUsername() {
+        String result = login.registerUser("John", "Doe", "userlongname", "Password1!");
+        assertEquals("Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length.", result);
     }
 
-    /**
-     * Test the registerUser() method with invalid username.
-     */
     @Test
-    public void testRegisterUserInvalidUsername() {
-        String result = login.registerUser("John", "Doe", "user123", "Passw0rd!");
-        assertEquals("Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length.", result, "Expected registration failure due to invalid username.");
+    public void testRegisterUserWithInvalidPassword() {
+        String result = login.registerUser("John", "Doe", "usr_1", "password");
+        assertEquals("Password is not correctly formatted, please ensure that the password contains at least 8 characters, a capital letter, a number and a special character.", result);
     }
 
-    /**
-     * Test the registerUser() method with invalid password.
-     */
     @Test
-    public void testRegisterUserInvalidPassword() {
-        String result = login.registerUser("John", "Doe", "user_", "password");
-        assertEquals("Password is not correctly formatted, please ensure that the password contains at least 8 characters, a capital letter, a number and a special character.", result, "Expected registration failure due to invalid password.");
+    public void testSuccessfulRegistration() {
+        String result = login.registerUser("John", "Doe", "usr_1", "Password1!");
+        assertEquals("User successfully registered!", result);
+        assertEquals("usr_1", login.getUsername(), "Username should match the registered value.");
     }
 
-    /**
-     * Test the loginUser() method with correct credentials.
-     */
     @Test
-    public void testLoginUserValid() {
-        // Register the user first
-        login.registerUser("John", "Doe", "user_", "Passw0rd!");
+    public void testLoginUser() {
+        // Register a user first
+        login.registerUser("Jane", "Doe", "usr_2", "Password1!");
 
-        // Now test the login with correct credentials
-        boolean loginResult = login.loginUser("user_", "Passw0rd!");
-        assertTrue(loginResult, "Expected successful login with correct credentials.");
+        // Test successful login
+        assertTrue(login.loginUser("usr_2", "Password1!"), "Login should succeed with correct credentials");
+
+        // Test unsuccessful login with wrong password
+        assertFalse(login.loginUser("usr_2", "WrongPass"), "Login should fail with incorrect password");
     }
 
-    /**
-     * Test the loginUser() method with incorrect credentials.
-     */
-    @Test
-    public void testLoginUserInvalid() {
-        // Register the user first
-        login.registerUser("John", "Doe", "user_", "Passw0rd!");
-
-        // Test the login with incorrect credentials
-        boolean loginResult = login.loginUser("user_", "WrongPassword");
-        assertFalse(loginResult, "Expected failed login due to incorrect password.");
-    }
-
-    /**
-     * Test the returnLoginStatus() method.
-     */
     @Test
     public void testReturnLoginStatus() {
-        // Register and login the user
-        login.registerUser("John", "Doe", "user_", "Passw0rd!");
-        login.loginUser("user_", "Passw0rd!");
+        // Register and login a user
+        login.registerUser("Alice", "Smith", "usr_3", "Password1!");
+        login.loginUser("usr_3", "Password1!");
 
-        // Check the login status
-        assertTrue(login.returnLoginStatus(), "Expected login status to be true after successful login.");
-
-        // Now login with wrong credentials and check status
-        login.loginUser("user_", "WrongPassword");
-        assertFalse(login.returnLoginStatus(), "Expected login status to be false after failed login.");
+        // Check if the login status is correct
+        assertTrue(login.returnLoginStatus(), "Login status should be true after successful login");
     }
 }
-
