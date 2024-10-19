@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-
 public class KhanbanTasks {
     private List<Task> tasks = new ArrayList<>(); // List to store all tasks
     private int totalHours = 0; // Total duration of all tasks
@@ -98,6 +97,42 @@ public class KhanbanTasks {
      */
     public int getTotalHours() {
         return totalHours;
+    }
+
+    /**
+     * Method to add a task directly for testing purposes.
+     * @param taskName The name of the task to be added.
+     * @param taskDescription A brief description of the task.
+     * @param developerDetails The name of the developer assigned to the task.
+     * @param taskDuration The estimated duration of the task.
+     * @param taskStatus The status of the task (To Do, Doing, Done).
+     */
+    public void addTask(String taskName, String taskDescription, String developerDetails, int taskDuration, String taskStatus) {
+        int taskNumber = tasks.size() + 1; // Assign a task number based on the current list size
+        String taskID = createTaskID(taskName, taskNumber, developerDetails);
+        Task newTask = new Task(taskName, taskNumber, taskDescription, developerDetails, taskDuration, taskID, taskStatus);
+        tasks.add(newTask);
+        totalHours += taskDuration; // Update the total hours
+    }
+
+    /**
+     * Method to remove a task based on task name.
+     * @param taskName The name of the task to be removed.
+     */
+    public void removeTask(String taskName) {
+        tasks.removeIf(task -> task.taskName.equals(taskName)); // Remove the task if found
+    }
+
+    /**
+     * Method to get the list of task names.
+     * @return List of task names.
+     */
+    public List<String> getTasks() {
+        List<String> taskNames = new ArrayList<>();
+        for (Task task : tasks) {
+            taskNames.add(task.taskName);
+        }
+        return taskNames;
     }
 
     /**
