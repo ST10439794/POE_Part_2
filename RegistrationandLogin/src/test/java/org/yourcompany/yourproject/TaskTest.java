@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+
 public class TaskTest {
 
 	@Test
@@ -55,23 +56,26 @@ public class TaskTest {
 		}
 
 		@Test
-		public void returnTotalHours() {
-			// Create multiple tasks with varying durations
-			new Task("Task 1", 0, "First Task", "Dev A", 10, "To Do");
-			new Task("Task 2", 1, "Second Task", "Dev B", 12, "Doing");
-			new Task("Task 3", 2, "Third Task", "Dev C", 55, "Done");
-			new Task("Task 4", 3, "Fourth Task", "Dev D", 11, "To Do");
-			new Task("Task 5", 4, "Fifth Task", "Dev E", 1, "Doing");
+    public void returnTotalHours() {
+        // Clear previous task durations to ensure a clean test environment
+        Task.clearTaskDurations();
 
-			int totalHours = Task.returnTotalHours();
-			assertEquals(89, totalHours, "Total hours should be correctly accumulated to 89.");
+        // Create multiple tasks with varying durations
+        new Task("Task 1", 0, "First Task", "Dev A", 10, "To Do");
+        new Task("Task 2", 1, "Second Task", "Dev B", 12, "Doing");
+        new Task("Task 3", 2, "Third Task", "Dev C", 55, "Done");
+        new Task("Task 4", 3, "Fourth Task", "Dev D", 11, "To Do");
+        new Task("Task 5", 4, "Fifth Task", "Dev E", 1, "Doing");
 
-			// Clear and add additional data to test
-			Task.clearTaskDurations();
-			new Task("Task 1", 0, "Task 1 description", "Dev F", 10, "To Do");
-			new Task("Task 2", 1, "Task 2 description", "Dev G", 12, "Doing");
+        int totalHours = Task.returnTotalHours();
+        assertEquals(89, totalHours, "Total hours should be correctly accumulated to 89.");
 
-			totalHours = Task.returnTotalHours();
-			assertEquals(22, totalHours, "Total hours should be correctly accumulated to 22.");
-		}
-	}
+        // Clear and add additional data to test
+        Task.clearTaskDurations();
+        new Task("Task 1", 0, "Task 1 description", "Dev F", 10, "To Do");
+        new Task("Task 2", 1, "Task 2 description", "Dev G", 12, "Doing");
+
+        totalHours = Task.returnTotalHours();
+        assertEquals(22, totalHours, "Total hours should be correctly accumulated to 22.");
+    }
+}

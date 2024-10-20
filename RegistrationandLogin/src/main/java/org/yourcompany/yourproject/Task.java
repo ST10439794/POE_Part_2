@@ -58,11 +58,6 @@ public final class Task {
         return taskID;
     }
 
-    // Method to clear all task durations
-    public static void clearTaskDurations() {
-        allTaskDurations.clear();
-    }
-
     // Method to display the full task details using JOptionPane
     public void printTaskDetails() {
         String taskDetails = "Task Status: " + taskStatus + "\n" +
@@ -78,7 +73,16 @@ public final class Task {
 
     // Method to return the total combined hours of all entered tasks
     public static int returnTotalHours() {
-        return allTaskDurations.stream().mapToInt(Integer::intValue).sum();
+        int totalHours = 0;
+        for (double duration : allTaskDurations) {
+            totalHours += duration;
+        }
+        return totalHours;
+    }
+
+    // Method to clear all task durations
+    public static void clearTaskDurations() {
+        allTaskDurations.clear();
     }
 
     // Method to display the total combined hours of all tasks using JOptionPane
