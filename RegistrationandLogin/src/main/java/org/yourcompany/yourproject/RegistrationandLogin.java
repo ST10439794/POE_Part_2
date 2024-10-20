@@ -1,23 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package org.yourcompany.yourproject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
+
 /**
- *
- * @author reseg
+ * Main class for handling user registration, login, and task management.
  */
 public class RegistrationandLogin {
+    private boolean isLoggedIn = false;
+    private List<Task> tasksList = new ArrayList<>();
 
     public static void main(String[] args) {
         // Create a Login object to handle user registration and login
         Login login = new Login();
-        KhanbanTasks khanbanTasks = new KhanbanTasks(); // Create a KhanbanTasks object to manage tasks
+        RegistrationandLogin app = new RegistrationandLogin(); // Main application instance
 
         // Loop to continuously display the main menu until the user chooses to exit
         while (true) {
-            String menu = "1. Register\n2. Login\n3. Check Login Status\n4. Add Tasks (You must be logged in)\n5. Exit";
+            String menu = "1. Register\n2. Login\n3. Check Login Status\n4. Add Tasks (You must be logged in)\n5. Show Report (Coming Soon)\n6. Exit";
             String choiceStr = JOptionPane.showInputDialog(null, menu, "Main Menu", JOptionPane.QUESTION_MESSAGE);
 
             // Convert user input to an integer; handle invalid input gracefully
@@ -25,7 +27,7 @@ public class RegistrationandLogin {
             try {
                 choice = Integer.parseInt(choiceStr);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 5.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 6.", "Error", JOptionPane.ERROR_MESSAGE);
                 continue; // Restart the loop
             }
 
@@ -55,12 +57,16 @@ public class RegistrationandLogin {
                 case 4:
                     // Allow the user to add tasks only if they are logged in
                     if (login.returnLoginStatus()) {
-                        khanbanTasks.manageTasks();
+                        app.manageTasks();
                     } else {
                         JOptionPane.showMessageDialog(null, "You must be logged in to add tasks.", "Access Denied", JOptionPane.WARNING_MESSAGE);
                     }
                     break;
                 case 5:
+                    // Show Report (Coming Soon)
+                    JOptionPane.showMessageDialog(null, "Feature Coming Soon!", "Show Report", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                case 6:
                     // Exit the application
                     JOptionPane.showMessageDialog(null, "Exiting the application. Goodbye!");
                     System.exit(0);
@@ -70,5 +76,48 @@ public class RegistrationandLogin {
                     JOptionPane.showMessageDialog(null, "Invalid option. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    // Method to manage adding tasks with user interaction
+    private void manageTasks() {
+        String input = JOptionPane.showInputDialog("How many tasks would you like to add?");
+        int numTasks;
+
+        // Validate input for number of tasks
+        try {
+            numTasks = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        for (int i = 0; i < numTasks; i++) {
+            String taskName = JOptionPane.showInputDialog("Enter the task name:");
+            String taskDescription = JOptionPane.showInputDialog("Enter the task description (max 50 characters):");
+            String developerDetails = JOptionPane.showInputDialog("Enter the developer's first and last name:");
+            String durationStr = JOptionPane.showInputDialog("Enter the task duration in hours:");
+
+            int taskDuration;
+            try {
+                taskDuration = Integer.parseInt(durationStr);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid duration. Please enter a valid number of hours.", "Error", JOptionPane.ERROR_MESSAGE);
+                continue; // Skip this iteration
+            }
+
+            String[] statusOptions = {"To Do", "Done", "Doing"};
+            String taskStatus = (String) JOptionPane.showInputDialog(null, "Choose the task status:", "Task Status",
+                    JOptionPane.QUESTION_MESSAGE, null, statusOptions, statusOptions[0]);
+
+            Task newTask = new Task(taskName, i, taskDescription, developerDetails, taskDuration, taskStatus);
+
+            // Only add the task if the description is valid
+            if (newTask.checkTaskDescription(taskDescription)) {
+                newTask.printTaskDetails();
+                tasksList.add(newTask);
+            }
+        }
+
+        Task.displayTotalHours();
     }
 }
