@@ -37,7 +37,7 @@ public final class Task {
 
     // Method to ensure that the task description is not more than 50 characters
     public boolean checkTaskDescription(String taskDescription) {
-        boolean isValid = taskDescription.length() <= 50;
+        boolean isValid = taskDescription != null && !taskDescription.isEmpty() && taskDescription.length() <= 50;
         if (isValid) {
             JOptionPane.showMessageDialog(null, "Task successfully captured", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
