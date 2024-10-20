@@ -24,11 +24,9 @@ public class RegistrationandLogin {
 
             // Convert user input to an integer; handle invalid input gracefully
             int choice;
-            try {
-                choice = Integer.parseInt(choiceStr);
-            } catch (NumberFormatException e) {
+            choice = Integer.parseInt(choiceStr);
+            if (choice < 1 || choice > 6) {
                 JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 6.", "Error", JOptionPane.ERROR_MESSAGE);
-                continue; // Restart the loop
             }
 
             switch (choice) {
@@ -80,29 +78,44 @@ public class RegistrationandLogin {
 
     // Method to manage adding tasks with user interaction
     private void manageTasks() {
-        String input = JOptionPane.showInputDialog("How many tasks would you like to add?");
-        int numTasks;
+        int numTasks = -1; // Initialize with an invalid value
+        boolean validInput = false;
 
-        // Validate input for number of tasks
-        try {
-            numTasks = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        while (!validInput) {
+            String input = JOptionPane.showInputDialog("How many tasks would you like to add?");
+            
+            if (input == null) {
+                // Handle cancel action
+                return; // Exit or handle accordingly
+            }
+
+            if (input.matches("\\d+")) { // Regex to check if the input is a number
+                numTasks = Integer.parseInt(input);
+                validInput = true; // Input is valid, exit the loop
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
         for (int i = 0; i < numTasks; i++) {
             String taskName = JOptionPane.showInputDialog("Enter the task name:");
             String taskDescription = JOptionPane.showInputDialog("Enter the task description (max 50 characters):");
             String developerDetails = JOptionPane.showInputDialog("Enter the developer's first and last name:");
-            String durationStr = JOptionPane.showInputDialog("Enter the task duration in hours:");
 
-            int taskDuration;
-            try {
-                taskDuration = Integer.parseInt(durationStr);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid duration. Please enter a valid number of hours.", "Error", JOptionPane.ERROR_MESSAGE);
-                continue; // Skip this iteration
+            int taskDuration = -1;
+            while (taskDuration < 0) {
+                String durationStr = JOptionPane.showInputDialog("Enter the task duration in hours:");
+            
+                if (durationStr == null) {
+                    // Handle cancel action
+                    return; // Exit or handle accordingly
+                }
+            
+                if (durationStr.matches("\\d+")) { // Check if input is a valid number
+                    taskDuration = Integer.parseInt(durationStr); // Parse the valid input
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid duration. Please enter a valid number of hours.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
             String[] statusOptions = {"To Do", "Done", "Doing"};
