@@ -9,53 +9,50 @@ public class TaskTest {
 
 	@Test
 	public void checkTaskDescription() {
-		Task t = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
+		Task task1 = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
+		Task task2 = new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing");
 
 		// Test with a valid description
-		assertTrue(t.checkTaskDescription("Valid description")); // Expect true
+		assertTrue(task1.checkTaskDescription("Valid description")); // Expect true
+		assertTrue(task2.checkTaskDescription("Valid description")); // Expect true
 
 		// Test with an empty description
-		assertFalse(t.checkTaskDescription("")); // Expect false
+		assertFalse(task1.checkTaskDescription("")); // Expect false
+		assertFalse(task2.checkTaskDescription("")); // Expect false
 
 		// Test with a description longer than 50 characters
-		String longDescription = "This description is definitely more than fifty characters long and should return false.";
-		assertFalse(t.checkTaskDescription(longDescription)); // Expect false
+		String longDescription1 = "This description is definitely more than fifty characters long and should return false.";
+		assertFalse(task1.checkTaskDescription(longDescription1)); // Expect false
+		String longDescription2 = "This description is definitely more than fifty characters long and should return false.";
+		assertFalse(task2.checkTaskDescription(longDescription2)); // Expect false
 	}
 
 	@Test
 	public void createTaskID() {
 		// Test with a single character task name and valid developer details
-		Task t = new Task("A", 2, "Valid task description", "Mit", 123, "To Do");
-		String expected = "A:2:MIT";  // Task ID expected format
-		String actual = t.createTaskID();
+		Task task1 = new Task("A", 2, "Valid task description", "Mit", 123, "To Do");
+		String expected1 = "A:2:MIT";  // Task ID expected format
+		String actual1 = task1.createTaskID();
 
-		assertEquals(expected, actual);
+		Task task2 = new Task("B", 3, "Valid task description", "Cit", 456, "Doing");
+		String expected2 = "CR:0:IKE";  // Task ID expected format
+		String actual2 = task2.createTaskID();
+
+		assertEquals(expected1, actual1);
+		assertEquals(expected2, actual2);
 	}
 
 	@Test
 	public void printTaskDetails() {
 		// Create a task with known values
-		Task t = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
+		Task task1 = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
+		Task task2 = new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Michael Smith", 10, "Doing");
+            // Set up the expected output details
+            // Adjust this based on expected Task ID
 
-		// Set up the expected output details
-		String expectedDetails = "Task Status: To Do\n" +
-								"Developer Details: Robyn Harrison\n" +
-								"Task Number: 1\n" +
-								"Task Name: Login Feature\n" +
-								"Task Description: Create Login to authenticate users\n" +
-								"Task ID: LO:1:SON\n" + // Adjust this based on expected Task ID
-								"Task Duration: 8 hours\n";
-
-		// Redirect the output or mock JOptionPane to capture the message
-		// Since JOptionPane directly displays dialogs, we can't directly capture output,
-		// but we can assert the correct values are set.
-
-		// Here, we'll just call the method to confirm it executes without throwing an exception
-		t.printTaskDetails();
-		
-		// You may want to replace the JOptionPane call in your Task class with a logging
-		// mechanism or use a testing framework to verify that the correct details are displayed.
-	}
+		task1.printTaskDetails();
+		task2.printTaskDetails();
+		}
 
 		@Test
 		public void returnTotalHours() {
