@@ -19,14 +19,14 @@ public class RegistrationandLogin {
 
         // Loop to continuously display the main menu until the user chooses to exit
         while (true) {
-            String menu = "1. Register\n2. Login\n3. Check Login Status\n4. Add Tasks (You must be logged in)\n5. Show Report (Coming Soon)\n6. Exit";
+            String menu = "1. Register\n2. Login\n3. Check Login Status\n4. Kanban";
             String choiceStr = JOptionPane.showInputDialog(null, menu, "Main Menu", JOptionPane.QUESTION_MESSAGE);
 
             // Convert user input to an integer; handle invalid input gracefully
             int choice;
             choice = Integer.parseInt(choiceStr);
-            if (choice < 1 || choice > 6) {
-                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 6.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (choice < 1 || choice > 4) {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 4.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
             switch (choice) {
@@ -53,24 +53,59 @@ public class RegistrationandLogin {
                     JOptionPane.showMessageDialog(null, "Login Status: " + (login.returnLoginStatus() ? "Logged in" : "Not logged in"));
                     break;
                 case 4:
-                    // Allow the user to add tasks only if they are logged in
-                    if (login.returnLoginStatus()) {
-                        app.manageTasks();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "You must be logged in to add tasks.", "Access Denied", JOptionPane.WARNING_MESSAGE);
+                    // User can enter Kanban
+                    if(login.returnLoginStatus()){
+                        app.displayKanbanMenu();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "You must be logged in to access the Kanban system.", "Access Denied", JOptionPane.WARNING_MESSAGE);
                     }
                     break;
                 case 5:
-                    // Show Report (Coming Soon)
-                    JOptionPane.showMessageDialog(null, "Feature Coming Soon!", "Show Report", JOptionPane.INFORMATION_MESSAGE);
-                    break;
-                case 6:
-                    // Exit the application
-                    JOptionPane.showMessageDialog(null, "Exiting the application. Goodbye!");
+                    //Exit the application
+                    
+                JOptionPane.showMessageDialog(null, "Exiting the application. Goodbye!");
                     System.exit(0);
                     break;
                 default:
                     // Handle invalid menu options
+                    JOptionPane.showMessageDialog(null, "Invalid option. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    //Method to display the Kanban menu after user login
+    private void displayKanbanMenu(){
+        //Display the welcome message for Easy Kanban
+        JOptionPane.showMessageDialog(null, "Welcome to EasyKanban", "Welcome", JOptionPane.INFORMATION_MESSAGE);
+        
+        //Loop to continuously display the kanban menu until the user chooses to quit
+        while(true){
+            String kanbanMenu = "1. Add Tasks \n2. Show Report (Coming Soon)\n3. Quit";
+            String kanbanChoiceStr = JOptionPane.showInputDialog(null, kanbanMenu, "EasyKanban Menu", JOptionPane.QUESTION_MESSAGE);
+            
+            int kanbanChoice;
+            try {
+                kanbanChoice = Integer.parseInt(kanbanChoiceStr);
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 3.", "Error", JOptionPane.ERROR_MESSAGE);
+                continue; //Restart the loop
+            }
+            
+            switch(kanbanChoice){
+                case 1:
+                    //Manage adding tasks to the Kanban system
+                    manageTasks();
+                    break;
+                case 2:
+                    //Show Report (Coming Soon)
+                    JOptionPane.showMessageDialog(null, "Feature Coming Soon!", "Show Report", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                case 3:
+                    //Return to the auth menu
+                    JOptionPane.showMessageDialog(null, "Returning to main menu.", "Logout", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                default:
+                    //Handle invalid menu options
                     JOptionPane.showMessageDialog(null, "Invalid option. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
