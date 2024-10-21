@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
  * Main class for handling user registration, login, and task management.
  */
 public class RegistrationandLogin {
-    private boolean isLoggedIn = false;
     private List<Task> tasksList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -84,11 +83,11 @@ public class RegistrationandLogin {
             String kanbanChoiceStr = JOptionPane.showInputDialog(null, kanbanMenu, "EasyKanban Menu", JOptionPane.QUESTION_MESSAGE);
             
             int kanbanChoice;
-            try {
+            if (kanbanChoiceStr.matches("\\d+")) { // Check if the input is only digits
                 kanbanChoice = Integer.parseInt(kanbanChoiceStr);
-            } catch (NumberFormatException e){
+            } else {
                 JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 3.", "Error", JOptionPane.ERROR_MESSAGE);
-                continue; //Restart the loop
+                continue; // Restart the loop
             }
             
             switch(kanbanChoice){
