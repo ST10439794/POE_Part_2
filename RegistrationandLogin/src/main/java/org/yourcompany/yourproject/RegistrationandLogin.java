@@ -19,7 +19,7 @@ public class RegistrationandLogin {
 
         // Loop to continuously display the main menu until the user chooses to exit
         while (true) {
-            String menu = "1. Register\n2. Login\n3. Check Login Status\n4. Kanban";
+            String menu = "1. Register\n2. Login\n3. Check Login Status\n4. Kanban Tasks";
             String choiceStr = JOptionPane.showInputDialog(null, menu, "Main Menu", JOptionPane.QUESTION_MESSAGE);
 
             // Convert user input to an integer; handle invalid input gracefully
