@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
  * Main class for handling user registration, login, and task management.
  */
 public class RegistrationandLogin {
-    private boolean isLoggedIn = false;
     private List<Task> tasksList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -83,7 +82,7 @@ public class RegistrationandLogin {
             String kanbanMenu = "1. Add Tasks \n2. Show Report (Coming Soon)\n3. Quit";
             String kanbanChoiceStr = JOptionPane.showInputDialog(null, kanbanMenu, "EasyKanban Menu", JOptionPane.QUESTION_MESSAGE);
             
-            int kanbanChoice;
+            int kanbanChoice = 0;
             try {
                 kanbanChoice = Integer.parseInt(kanbanChoiceStr);
             } catch (NumberFormatException e){
