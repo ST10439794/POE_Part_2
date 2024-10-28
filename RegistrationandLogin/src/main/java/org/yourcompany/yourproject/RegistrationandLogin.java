@@ -82,12 +82,10 @@ public class RegistrationandLogin {
             String kanbanMenu = "1. Add Tasks \n2. Show Report (Coming Soon)\n3. Quit";
             String kanbanChoiceStr = JOptionPane.showInputDialog(null, kanbanMenu, "EasyKanban Menu", JOptionPane.QUESTION_MESSAGE);
             
-            int kanbanChoice = 0;
-            try {
-                kanbanChoice = Integer.parseInt(kanbanChoiceStr);
-            } catch (NumberFormatException e){
+            int kanbanChoice;
+            kanbanChoice = Integer.parseInt(kanbanChoiceStr);
+            if (kanbanChoice < 1 || kanbanChoice > 3){
                 JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 3.", "Error", JOptionPane.ERROR_MESSAGE);
-                continue; //Restart the loop
             }
             
             switch(kanbanChoice){
