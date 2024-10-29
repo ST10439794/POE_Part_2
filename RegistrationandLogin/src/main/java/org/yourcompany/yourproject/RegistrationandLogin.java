@@ -83,11 +83,9 @@ public class RegistrationandLogin {
             String kanbanChoiceStr = JOptionPane.showInputDialog(null, kanbanMenu, "EasyKanban Menu", JOptionPane.QUESTION_MESSAGE);
             
             int kanbanChoice;
-            if (kanbanChoiceStr.matches("\\d+")) { // Check if the input is only digits
-                kanbanChoice = Integer.parseInt(kanbanChoiceStr);
-            } else {
+            kanbanChoice = Integer.parseInt(kanbanChoiceStr);
+            if (kanbanChoice < 1 || kanbanChoice > 3){
                 JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 3.", "Error", JOptionPane.ERROR_MESSAGE);
-                continue; // Restart the loop
             }
             
             switch(kanbanChoice){
