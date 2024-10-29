@@ -5,57 +5,55 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-
 public class TaskTest {
 
-	@Test
-	public void checkTaskDescription() {
-		Task task1 = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
-		Task task2 = new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing");
+    @Test
+    public void checkTaskDescription() {
+        Task task1 = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
+        Task task2 = new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing");
 
-		// Test with a valid description
-		assertTrue(task1.checkTaskDescription("Valid description")); // Expect true
-		assertTrue(task2.checkTaskDescription("Valid description")); // Expect true
+        // Test with a valid description
+        assertTrue(task1.checkTaskDescription("Valid description")); // Expect true
+        assertTrue(task2.checkTaskDescription("Valid description")); // Expect true
 
-		// Test with an empty description
-		assertFalse(task1.checkTaskDescription("")); // Expect false
-		assertFalse(task2.checkTaskDescription("")); // Expect false
+        // Test with an empty description
+        assertFalse(task1.checkTaskDescription("")); // Expect false
+        assertFalse(task2.checkTaskDescription("")); // Expect false
 
-		// Test with a description longer than 50 characters
-		String longDescription1 = "This description is definitely more than fifty characters long and should return false.";
-		assertFalse(task1.checkTaskDescription(longDescription1)); // Expect false
-		String longDescription2 = "This description is definitely more than fifty characters long and should return false.";
-		assertFalse(task2.checkTaskDescription(longDescription2)); // Expect false
-	}
+        // Test with a description longer than 50 characters
+        String longDescription1 = "This description is definitely more than fifty characters long and should return false.";
+        assertFalse(task1.checkTaskDescription(longDescription1)); // Expect false
+        String longDescription2 = "This description is definitely more than fifty characters long and should return false.";
+        assertFalse(task2.checkTaskDescription(longDescription2)); // Expect false
+    }
 
-	@Test
-	public void createTaskID() {
-		// Test with a single character task name and valid developer details
-		Task task1 = new Task("A", 2, "Valid task description", "Mit", 123, "To Do");
-		String expected1 = "A:2:MIT";  // Task ID expected format
-		String actual1 = task1.createTaskID();
+    @Test
+    public void createTaskID() {
+        // Test with a single character task name and valid developer details
+        Task task1 = new Task("A", 2, "Valid task description", "Mit", 123, "To Do");
+        String expected1 = "A:2:MIT";  // Task ID expected format
+        String actual1 = task1.createTaskID();
 
-		Task task2 = new Task("B", 3, "Valid task description", "Cit", 456, "Doing");
-		String expected2 = "CR:0:IKE";  // Task ID expected format
-		String actual2 = task2.createTaskID();
+        Task task2 = new Task("B", 3, "Valid task description", "Cit", 456, "Doing");
+        String expected2 = "CR:0:IKE";  // Task ID expected format
+        String actual2 = task2.createTaskID();
 
-		assertEquals(expected1, actual1);
-		assertEquals(expected2, actual2);
-	}
+        assertEquals(expected1, actual1);
+        assertEquals(expected2, actual2);
+    }
 
-	@Test
-	public void printTaskDetails() {
-		// Create a task with known values
-		Task task1 = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
-		Task task2 = new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Michael Smith", 10, "Doing");
-            // Set up the expected output details
-            // Adjust this based on expected Task ID
+    @Test
+    public void printTaskDetails() {
+        // Create a task with known values
+        Task task1 = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
+        Task task2 = new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Michael Smith", 10, "Doing");
 
-		task1.printTaskDetails();
-		task2.printTaskDetails();
-		}
+        // Expected output details setup here based on Task ID
+        task1.printTaskDetails();
+        task2.printTaskDetails();
+    }
 
-		@Test
+    @Test
     public void returnTotalHours() {
         // Clear previous task durations to ensure a clean test environment
         Task.clearTaskDurations();
