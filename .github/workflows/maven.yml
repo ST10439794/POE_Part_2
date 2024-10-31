@@ -10,9 +10,9 @@ name: Java CI
 
 on:
   push:
-    branches: [ "KhanbanTasks" ]  # Replace "dev" with your branch name
+    branches: [ "KhanbanTasks" ]  # Trigger on push to KhanbanTasks branch
   pull_request:
-    branches: [ "KhanbanTasks" ]  # Replace "dev" with your branch name
+    branches: [ "KhanbanTasks" ]  # Trigger on pull requests to KhanbanTasks branch
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '22.0.2'  # Set to your Java version
-
+  
     - name: Cache Maven dependencies
       uses: actions/cache@v2
       with:
@@ -38,4 +38,3 @@ jobs:
 
     - name: Build and Test
       run: mvn clean test
-
