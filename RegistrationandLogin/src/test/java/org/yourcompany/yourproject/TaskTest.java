@@ -35,7 +35,7 @@ public class TaskTest {
         String actual1 = task1.createTaskID();
 
         Task task2 = new Task("B", 3, "Valid task description", "Cit", 456, "Doing");
-        String expected2 = "CR:0:IKE";  // Task ID expected format
+        String expected2 = "B:3:CIT";  // Task ID expected format
         String actual2 = task2.createTaskID();
 
         assertEquals(expected1, actual1);
