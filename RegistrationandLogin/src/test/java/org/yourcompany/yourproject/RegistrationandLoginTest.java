@@ -1,24 +1,19 @@
 package org.yourcompany.yourproject;
 
-import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeEach;  // Import this for setup
 import org.junit.jupiter.api.Test;
 
 public class RegistrationandLoginTest {
 
     private Login login;
 
+    // Setup method to initialize the Login object before each test
     @BeforeEach
     public void setUp() {
-        login = new Login();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        login = null;
+        login = new Login();  // Adjust this based on how your Login class is structured
     }
 
     /**
@@ -81,5 +76,13 @@ public class RegistrationandLoginTest {
 
         // Check if the login status is correct
         assertTrue(login.returnLoginStatus(), "Login status should be true after successful login");
+    }
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
     }
 }

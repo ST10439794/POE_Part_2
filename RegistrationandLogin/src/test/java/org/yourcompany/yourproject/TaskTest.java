@@ -3,15 +3,23 @@ package org.yourcompany.yourproject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TaskTest {
 
+    private Task task1;
+    private Task task2;
+
+    @BeforeEach
+    public void setUp() {
+        // Instantiate the Task objects before each test
+        task1 = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
+        task2 = new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing");
+    }
+
     @Test
     public void checkTaskDescription() {
-        Task task1 = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
-        Task task2 = new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing");
-
         // Test with a valid description
         assertTrue(task1.checkTaskDescription("Valid description")); // Expect true
         assertTrue(task2.checkTaskDescription("Valid description")); // Expect true
@@ -21,10 +29,9 @@ public class TaskTest {
         assertFalse(task2.checkTaskDescription("")); // Expect false
 
         // Test with a description longer than 50 characters
-        String longDescription1 = "This description is definitely more than fifty characters long and should return false.";
-        assertFalse(task1.checkTaskDescription(longDescription1)); // Expect false
-        String longDescription2 = "This description is definitely more than fifty characters long and should return false.";
-        assertFalse(task2.checkTaskDescription(longDescription2)); // Expect false
+        String longDescription = "This description is definitely more than fifty characters long and should return false.";
+        assertFalse(task1.checkTaskDescription(longDescription)); // Expect false
+        assertFalse(task2.checkTaskDescription(longDescription)); // Expect false
     }
 
     @Test
@@ -45,10 +52,7 @@ public class TaskTest {
     @Test
     public void printTaskDetails() {
         // Create a task with known values
-        Task task1 = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
-        Task task2 = new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Michael Smith", 10, "Doing");
-
-        // Expected output details setup here based on Task ID
+        // Output will be printed to the console; no assertions are made here
         task1.printTaskDetails();
         task2.printTaskDetails();
     }
