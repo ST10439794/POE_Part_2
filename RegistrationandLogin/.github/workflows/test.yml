@@ -1,29 +1,25 @@
 name: Java CI
 
-# Define when the workflow should run
 on:
   push:
-    branches: [ "KhanbanTasks" ]
+    branches: [ "KhanbanTasks" ]  # Replace "dev" with your branch name
   pull_request:
-    branches: [ "KhanbanTasks" ]
+    branches: [ "KhanbanTasks" ]  # Replace "dev" with your branch name
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   build:
-    # Specify the environment where the job will run
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the repository
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Step 2: Set up the Java Development Kit (JDK)
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '22'  # Adjust to your Java version (e.g., 11, 8, etc.)
+        java-version: '22.0.2'  # Set to your Java version
 
-    # Step 3: Cache Maven dependencies to speed up the build
     - name: Cache Maven dependencies
       uses: actions/cache@v2
       with:
@@ -32,6 +28,5 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-    # Step 4: Build the project and run tests
     - name: Build and Test
       run: mvn clean test
