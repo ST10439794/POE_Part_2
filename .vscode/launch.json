@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "RegistrationandLogin",
+            "request": "launch",
+            "mainClass": "org.yourcompany.yourproject.RegistrationandLogin",
+            "projectName": "RegistrationandLogin"
+        },
+        {
+            "type": "java",
+            "name": "Run All Tests Automatically",
+            "request": "launch",
+            "mainClass": "",
+            "args": "",
+            "console": "integratedTerminal",
+            "preLaunchTask": "runTestsOnSave"
+        }
+    ]
+}
