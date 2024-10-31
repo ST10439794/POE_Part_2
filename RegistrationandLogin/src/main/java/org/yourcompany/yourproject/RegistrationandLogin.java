@@ -121,7 +121,7 @@ public class RegistrationandLogin {
                 return; // Exit or handle accordingly
             }
 
-            if (input.matches("\\d+")) { // Regex to check if the input is a number
+            if (input.matches("\\d+")) { // Regex to check if the input is a number.
                 numTasks = Integer.parseInt(input);
                 validInput = true; // Input is valid, exit the loop
             } else {
