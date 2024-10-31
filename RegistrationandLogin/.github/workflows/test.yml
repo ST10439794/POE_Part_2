@@ -21,7 +21,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '17'  # Adjust to your Java version (e.g., 11, 8, etc.)
+        java-version: '22'  # Adjust to your Java version (e.g., 11, 8, etc.)
 
     # Step 3: Cache Maven dependencies to speed up the build
     - name: Cache Maven dependencies
