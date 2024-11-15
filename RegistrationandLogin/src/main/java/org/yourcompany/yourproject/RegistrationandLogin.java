@@ -5,18 +5,13 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-/**
- * Main class for handling user registration, login, and task management.
- */
 public class RegistrationandLogin {
     private List<Task> tasksList = new ArrayList<>();
 
     public static void main(String[] args) {
-        // Create a Login object to handle user registration and login
         Login login = new Login();
-        RegistrationandLogin app = new RegistrationandLogin(); // Main application instance
+        RegistrationandLogin app = new RegistrationandLogin();
 
-        // Loop to continuously display the main menu until the user chooses to exit
         while (true) {
             String menu = "1. Register\n2. Login\n3. Check Login Status\n4. Kanban Tasks";
             String choiceStr = JOptionPane.showInputDialog(null, menu, "Main Menu", JOptionPane.QUESTION_MESSAGE);
@@ -69,61 +64,56 @@ public class RegistrationandLogin {
                     // Handle invalid menu options
                     JOptionPane.showMessageDialog(null, "Invalid option. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             }
+            
         }
     }
-    
-    //Method to display the Kanban menu after user login
-    private void displayKanbanMenu(){
-        //Display the welcome message for Easy Kanban
+
+    private void displayKanbanMenu() {
         JOptionPane.showMessageDialog(null, "Welcome to EasyKanban", "Welcome", JOptionPane.INFORMATION_MESSAGE);
-        
-        //Loop to continuously display the kanban menu until the user chooses to quit
-        while(true){
-            String kanbanMenu = "1. Add Tasks \n2. Show Report (Coming Soon)\n3. Quit";
+
+        while (true) {
+            String kanbanMenu = "1. Add Tasks\n2. Show Report\n3. Search Task\n4. Delete Task\n5. Find Longest Task\n6. Quit";
             String kanbanChoiceStr = JOptionPane.showInputDialog(null, kanbanMenu, "EasyKanban Menu", JOptionPane.QUESTION_MESSAGE);
-            
-            int kanbanChoice;
-            kanbanChoice = Integer.parseInt(kanbanChoiceStr);
-            if (kanbanChoice < 1 || kanbanChoice > 3){
-                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 3.", "Error", JOptionPane.ERROR_MESSAGE);
+
+            int kanbanChoice = Integer.parseInt(kanbanChoiceStr);
+            if (kanbanChoice < 1 || kanbanChoice > 6) {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number between 1 and 6.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
-            switch(kanbanChoice){
+
+            switch (kanbanChoice) {
                 case 1:
-                    //Manage adding tasks to the Kanban system
                     manageTasks();
                     break;
                 case 2:
-                    //Show Report (Coming Soon)
-                    JOptionPane.showMessageDialog(null, "Feature Coming Soon!", "Show Report", JOptionPane.INFORMATION_MESSAGE);
+                    Task.displayReport(tasksList);
                     break;
                 case 3:
-                    //Return to the auth menu
+                    searchTask();
+                    break;
+                case 4:
+                    deleteTask();
+                    break;
+                case 5:
+                    findLongestTask();
+                    break;
+                case 6:
                     JOptionPane.showMessageDialog(null, "Returning to main menu.", "Logout", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 default:
-                    //Handle invalid menu options
                     JOptionPane.showMessageDialog(null, "Invalid option. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
-    // Method to manage adding tasks with user interaction
     private void manageTasks() {
-        int numTasks = -1; // Initialize with an invalid value
+        int numTasks = -1;
         boolean validInput = false;
 
         while (!validInput) {
             String input = JOptionPane.showInputDialog("How many tasks would you like to add?");
-            
-            if (input == null) {
-                // Handle cancel action
-                return; // Exit or handle accordingly
-            }
-
-            if (input.matches("\\d+")) { // Regex to check if the input is a number.
+            if (input.matches("\\d+")) {
                 numTasks = Integer.parseInt(input);
-                validInput = true; // Input is valid, exit the loop
+                validInput = true;
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -136,17 +126,11 @@ public class RegistrationandLogin {
 
             int taskDuration = -1;
             while (taskDuration < 0) {
-                String durationStr = JOptionPane.showInputDialog("Enter the task duration in hours:");
-            
-                if (durationStr == null) {
-                    // Handle cancel action
-                    return; // Exit or handle accordingly
-                }
-            
-                if (durationStr.matches("\\d+")) { // Check if input is a valid number
-                    taskDuration = Integer.parseInt(durationStr); // Parse the valid input
+                String durationInput = JOptionPane.showInputDialog("Enter task duration (hours):");
+                if (durationInput.matches("\\d+")) {
+                    taskDuration = Integer.parseInt(durationInput);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Invalid duration. Please enter a valid number of hours.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number for task duration.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -154,15 +138,37 @@ public class RegistrationandLogin {
             String taskStatus = (String) JOptionPane.showInputDialog(null, "Choose the task status:", "Task Status",
                     JOptionPane.QUESTION_MESSAGE, null, statusOptions, statusOptions[0]);
 
-            Task newTask = new Task(taskName, i, taskDescription, developerDetails, taskDuration, taskStatus);
-
-            // Only add the task if the description is valid
-            if (newTask.checkTaskDescription(taskDescription)) {
-                newTask.printTaskDetails();
-                tasksList.add(newTask);
-            }
+            Task newTask = new Task(taskName, i + 1, taskDescription, developerDetails, taskDuration, taskStatus);
+            tasksList.add(newTask);
         }
+    }
 
-        Task.displayTotalHours();
+    private void searchTask() {
+        String taskName = JOptionPane.showInputDialog("Enter the task name to search:");
+        Task task = Task.searchTaskByName(tasksList, taskName);
+        if (task != null) {
+            task.printTaskDetails();
+        } else {
+            JOptionPane.showMessageDialog(null, "Task not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void deleteTask() {
+        String taskName = JOptionPane.showInputDialog("Enter the task name to delete:");
+        boolean isDeleted = Task.deleteTaskByName(tasksList, taskName);
+        if (isDeleted) {
+            JOptionPane.showMessageDialog(null, "Task deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Task not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void findLongestTask() {
+        Task longestTask = Task.findLongestTask(tasksList);
+        if (longestTask != null) {
+            JOptionPane.showMessageDialog(null, "Longest Task: " + longestTask.getTaskID() + " with duration of " + longestTask.getTaskDuration() + " hours.", "Longest Task", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tasks found.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

@@ -10,7 +10,7 @@ public final class Task {
     private int taskNumber;
     private String taskDescription;
     private String developerDetails;
-    private int taskDuration;
+    private int taskDuration; // This is private
     private String taskID;
     private String taskStatus;
 
@@ -19,8 +19,6 @@ public final class Task {
 
     // Constructor to initialize a new task with its details
     public Task(String taskName, int taskNumber, String taskDescription, String developerDetails, int taskDuration, String taskStatus) {
-        
-        // Validate the task description before setting the values
         if (!checkTaskDescription(taskDescription)) {
             return; // If invalid, do not proceed with task creation
         }
@@ -35,7 +33,6 @@ public final class Task {
         allTaskDurations.add(taskDuration); // Add the task duration to the list of all durations
     }
 
-    // Method to ensure that the task description is not more than 50 characters
     public boolean checkTaskDescription(String taskDescription) {
         boolean isValid = taskDescription != null && !taskDescription.isEmpty() && taskDescription.length() <= 50;
         if (isValid) {
@@ -46,19 +43,20 @@ public final class Task {
         return isValid;
     }
 
-    // Method to create and return the TaskID
     public String createTaskID() {
         String taskPrefix = taskName.length() >= 2 ? taskName.substring(0, 2).toUpperCase() : taskName.toUpperCase();
         String developerSuffix = developerDetails.length() >= 3 ? developerDetails.substring(developerDetails.length() - 3).toUpperCase() : developerDetails.toUpperCase();
         return taskPrefix + ":" + taskNumber + ":" + developerSuffix;
     }
 
-    // Method to get the Task ID
     public String getTaskID() {
         return taskID;
     }
 
-    // Method to display the full task details using JOptionPane
+    public int getTaskDuration() {
+        return taskDuration; // Getter for taskDuration
+    }
+
     public void printTaskDetails() {
         String taskDetails = "Task Status: " + taskStatus + "\n" +
                 "Developer Details: " + developerDetails + "\n" +
@@ -71,23 +69,44 @@ public final class Task {
         JOptionPane.showMessageDialog(null, taskDetails, "Task Details", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    // Method to return the total combined hours of all entered tasks
+    public static Task searchTaskByName(List<Task> tasks, String taskName) {
+        for (Task task : tasks) {
+            if (task.taskName.equalsIgnoreCase(taskName)) {
+                return task;
+            }
+        }
+        return null;
+    }
+
+    public static boolean deleteTaskByName(List<Task> tasks, String taskName) {
+        return tasks.removeIf(task -> task.taskName.equalsIgnoreCase(taskName));
+    }
+
+    public static Task findLongestTask(List<Task> tasks) {
+        return tasks.stream().max((a, b) -> Integer.compare(a.getTaskDuration(), b.getTaskDuration())).orElse(null);
+    }
+
+    public static void displayReport(List<Task> tasks) {
+        StringBuilder report = new StringBuilder("Task Report:\n");
+        for (Task task : tasks) {
+            report.append(String.format("Task: %s | Developer: %s | Duration: %d hours\n", task.taskName, task.developerDetails, task.getTaskDuration()));
+        }
+        JOptionPane.showMessageDialog(null, report.toString(), "Task Report", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public static int returnTotalHours() {
         int totalHours = 0;
-        for (double duration : allTaskDurations) {
+        for (Integer duration : allTaskDurations) {
             totalHours += duration;
         }
         return totalHours;
     }
 
-    // Method to clear all task durations
-    public static void clearTaskDurations() {
-        allTaskDurations.clear();
-    }
-
-    // Method to display the total combined hours of all tasks using JOptionPane
-    public static void displayTotalHours() {
-        int totalHours = returnTotalHours();
-        JOptionPane.showMessageDialog(null, "Total hours for all tasks: " + totalHours + " hours", "Total Hours", JOptionPane.INFORMATION_MESSAGE);
+    public static void displayTotalHours(List<Task> tasks) {
+        int totalHours = 0;
+        for (Task task : tasks) {
+            totalHours += task.getTaskDuration(); // Use the getter to access taskDuration
+        }
+        JOptionPane.showMessageDialog(null, "Total Hours for All Tasks: " + totalHours + " hours", "Total Hours", JOptionPane.INFORMATION_MESSAGE);
     }
 }
