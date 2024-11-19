@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class RegistrationandLogin {
-    private List<Task> tasksList = new ArrayList<>();
+    private final List<Task> tasksList = new ArrayList<>();
 
     public static void main(String[] args) {
         Login login = new Login();
