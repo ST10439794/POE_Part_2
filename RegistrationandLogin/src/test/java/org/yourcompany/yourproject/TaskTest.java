@@ -8,23 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TaskTest {
     private List<Task> tasksList;
-
-    @BeforeEach
-    void setUp() {
-        Task.getAllTaskDurations().clear();
-        Task.getAllDeveloperNames().clear();
-        Task.getAllTaskNames().clear();
-        Task.getAllTaskIDs().clear();
-        Task.getAllTaskStatuses().clear();
-        tasksList = new ArrayList<>();
-        tasksList.add(new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do"));
-        tasksList.add(new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing"));
-    }
 
     @Test
     void testCheckTaskDescriptionSuccess() {
