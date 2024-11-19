@@ -2,9 +2,9 @@ name: Java CI
 
 on:
   push:
-    branches: [ "KhanbanTasks" ]  # Replace "dev" with your branch name
+    branches: [ "KhanbanTasks" ]  # Replace "KhanbanTasks" with your branch name
   pull_request:
-    branches: [ "KhanbanTasks" ]  # Replace "dev" with your branch name
+    branches: [ "KhanbanTasks" ]  # Replace "KhanbanTasks" with your branch name
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '22.0.2'  # Set to your Java version
+        distribution: 'temurin'  # Specify the JDK distribution
 
     - name: Cache Maven dependencies
       uses: actions/cache@v2
