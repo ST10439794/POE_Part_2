@@ -73,34 +73,37 @@ class TaskTest {
     void testDisplayReport() {
         String report = Task.displayReport(tasksList);
         String expectedReport = 
-                "Task Report:\n" +
-                "Task Name: Create Login\n" + 
-                "Task ID: CR:1:ITH\n" + 
-                "Description: Implement user login feature\n" + 
-                "Developer: Mike Smith\n" + 
-                "Duration: 5 hours\n" + 
-                "Status: To Do\n\n" + 
-
-                "Task Name: Add Security\n" + 
-                "Task ID: AD:2:TON\n" + 
-                "Description: Enhance app security\n" + 
-                "Developer: Edward Harrington\n" + 
-                "Duration: 8 hours\n" + 
-                "Status: Doing\n\n" + 
-
-                "Task Name: Create Reports\n" + 
-                "Task ID: CR:3:SON\n" + 
-                "Description: Generate user reports\n" + 
-                "Developer: Samantha Paulson\n" + 
-                "Duration: 7 hours\n" + 
-                "Status: Done\n\n" + 
-
-                "Task Name: Optimize Database\n" + 
-                "Task ID: OP:4:ZER\n" + 
-                "Description: Optimize database performance\n" + 
-                "Developer: Glenda Oberholzer\n" + 
-                "Duration: 11 hours\n" + 
-                "Status: Doing\n\n";
+                """
+                Task Report:
+                Task Name: Create Login
+                Task ID: CR:1:ITH
+                Description: Implement user login feature
+                Developer: Mike Smith
+                Duration: 5 hours
+                Status: To Do
+                
+                Task Name: Add Security
+                Task ID: AD:2:TON
+                Description: Enhance app security
+                Developer: Edward Harrington
+                Duration: 8 hours
+                Status: Doing
+                
+                Task Name: Create Reports
+                Task ID: CR:3:SON
+                Description: Generate user reports
+                Developer: Samantha Paulson
+                Duration: 7 hours
+                Status: Done
+                
+                Task Name: Optimize Database
+                Task ID: OP:4:ZER
+                Description: Optimize database performance
+                Developer: Glenda Oberholzer
+                Duration: 11 hours
+                Status: Doing
+                
+                """;
 
         assertEquals(expectedReport, report);
     }

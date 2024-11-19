@@ -1,6 +1,8 @@
 package org.yourcompany.yourproject;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -50,8 +52,8 @@ public class RegistrationandLoginTest {
     @Test
     public void testSuccessfulRegistration() {
         String result = login.registerUser ("John", "Doe", "usr_1", "Password1!");
-        assertEquals("User  successfully registered!", result);
-        assertEquals("usr_1", login.getUsername(), "Username should match the registered value.");
+        assertEquals("User successfully registered!", result);
+        assertEquals("usr_1", login.getUsername(), "Username should match the registered value!");
     }
 
     @Test
