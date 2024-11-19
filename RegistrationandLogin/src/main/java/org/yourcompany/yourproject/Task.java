@@ -43,32 +43,46 @@ public final class Task {
     }
 
     public boolean checkTaskDescription(String taskDescription) {
-        if (taskDescription.length() <= 50) {
-            JOptionPane.showMessageDialog(null, "Task successfully captured", "Success", JOptionPane.INFORMATION_MESSAGE);
-            return true;
-        } else {
+        if (taskDescription == null || taskDescription.length() > 50) {
             JOptionPane.showMessageDialog(null, "Please enter a task description of less than 50 characters", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        JOptionPane.showMessageDialog(null, "Task successfully captured", "Success", JOptionPane.INFORMATION_MESSAGE);
+        return true;
     }
+    
+    
 
     public String createTaskID() {
-        String taskPrefix = taskName.substring(0, Math.min(2, taskName.length())).toUpperCase();  // "CR"
-        String developerSuffix = developerDetails.substring(Math.max(0, developerDetails.length() - 3)).toUpperCase();  // "ITH"
-        return taskPrefix + ":" + taskNumber + ":" + developerSuffix;  // "CR:1:ITH"
+        // Generate task prefix based on the first two letters of the task name.
+        String taskPrefix = taskName.substring(0, 1).toUpperCase(); // Get the first letter of the task name.
+        if (taskName.length() > 1 && taskName.contains(" ")) {
+            // Get the first letter of the second word (if available).
+            taskPrefix += taskName.substring(taskName.indexOf(" ") + 1, taskName.indexOf(" ") + 2).toUpperCase();
+        } else {
+            taskPrefix = taskPrefix.toUpperCase();
+        }
+    
+        // Generate developer suffix using the last three characters of the developer's name.
+        String developerSuffix = developerDetails.length() > 2 ? developerDetails.substring(developerDetails.length() - 3).toUpperCase() : developerDetails.toUpperCase();
+    
+        return taskPrefix + ":" + taskNumber + ":" + developerSuffix;
     }
-
-    public void printTaskDetails() {
-        JOptionPane.showMessageDialog(null,
+    
+    public String printTaskDetails() {
+        String details = 
                 "Task Status: " + taskStatus + "\n" +
-                        "Developer Details: " + developerDetails + "\n" +
-                        "Task Number: " + taskNumber + "\n" +
-                        "Task Name: " + taskName + "\n" +
-                        "Task Description: " + taskDescription + "\n" +
-                        "Task ID: " + taskID + "\n" +
-                        "Task Duration: " + taskDuration + " hours",
-                "Task Details", JOptionPane.INFORMATION_MESSAGE);
+                "Developer Details: " + developerDetails + "\n" +
+                "Task Number: " + taskNumber + "\n" +
+                "Task Name: " + taskName + "\n" +
+                "Task Description: " + taskDescription + "\n" +
+                "Task ID: " + taskID + "\n" +
+                "Task Duration: " + taskDuration + " hours";
+    
+        JOptionPane.showMessageDialog(null, details, "Task Details", JOptionPane.INFORMATION_MESSAGE);
+        return details;
     }
+    
 
     // Getter methods for accessing private fields
     public String getTaskID() {
@@ -98,26 +112,29 @@ public final class Task {
     public String getTaskStatus() {
         return taskStatus;
     }
+    
 
     // Static method to display the report of all tasks
     public static String displayReport(List<Task> tasks) {
         if (tasks.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No tasks to display.", "Task Report", JOptionPane.INFORMATION_MESSAGE);
+            return "No tasks to display.";
         }
     
-        String report = "Task Report:\n";
+        StringBuilder report = new StringBuilder("Task Report:\n");
         for (Task task : tasks) {
-            report += "Task Name: " + task.getTaskName() + "\n" +
-                      "Task ID: " + task.getTaskID() + "\n" +
-                      "Description: " + task.getTaskDescription() + "\n" +
-                      "Developer: " + task.getDeveloperDetails() + "\n" +
-                      "Duration: " + task.getTaskDuration() + " hours\n" +
-                      "Status: " + task.getTaskStatus() + "\n\n";
+            report.append("Task Name: ").append(task.getTaskName()).append("\n")
+                  .append("Task ID: ").append(task.getTaskID()).append("\n")
+                  .append("Description: ").append(task.getTaskDescription()).append("\n")
+                  .append("Developer: ").append(task.getDeveloperDetails()).append("\n")
+                  .append("Duration: ").append(task.getTaskDuration()).append(" hours\n")
+                  .append("Status: ").append(task.getTaskStatus()).append("\n\n");
         }
     
-        JOptionPane.showMessageDialog(null, report, "Task Report", JOptionPane.INFORMATION_MESSAGE);
-        return report;
+        JOptionPane.showMessageDialog(null, report.toString(), "Task Report", JOptionPane.INFORMATION_MESSAGE);
+        return report.toString();
     }
+    
     
 
     public static Task searchTaskByName(List<Task> tasks, String name) {
@@ -160,6 +177,8 @@ public final class Task {
         }
         return total;
     }
+    
+    
 
     // Static method to get all developer names
     public static List<String> getAllDeveloperNames() {

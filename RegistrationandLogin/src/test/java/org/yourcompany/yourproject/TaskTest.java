@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,98 +14,137 @@ import org.junit.jupiter.api.Test;
 class TaskTest {
     private List<Task> tasksList;
 
-
     @BeforeEach
     void setUp() {
+        Task.getAllTaskDurations().clear();
+        Task.getAllDeveloperNames().clear();
+        Task.getAllTaskNames().clear();
+        Task.getAllTaskIDs().clear();
+        Task.getAllTaskStatuses().clear();
         tasksList = new ArrayList<>();
-        tasksList.add(new Task("Create Login", 1, "Implement user login feature", "Mike Smith", 5, "To Do"));
-        tasksList.add(new Task("Add Security", 2, "Enhance app security", "Edward Harrington", 8, "Doing"));
-        tasksList.add(new Task("Create Reports", 3, "Generate user reports", "Samantha Paulson", 7, "Done"));
-        tasksList.add(new Task("Optimize Database", 4, "Optimize database performance", "Glenda Oberholzer", 11, "Doing"));
+        tasksList.add(new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do"));
+        tasksList.add(new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing"));
     }
 
     @Test
-    void testDeveloperArrayCorrectlyPopulated() {
-        List<String> developers = new ArrayList<>();
-        for (Task task : tasksList) {
-            developers.add(task.getDeveloperDetails());
-        }
-
-        assertEquals(List.of("Mike Smith", "Edward Harrington", "Samantha Paulson", "Glenda Oberholzer"), developers);
+    void testCheckTaskDescriptionSuccess() {
+        Task task = new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
+        
+        // Test that the description is valid
+        boolean isValid = task.checkTaskDescription(task.getTaskDescription());
+        assertTrue(isValid);  // Description is <= 50 characters, so this should pass
     }
 
     @Test
-    void testLongestDurationTask() {
-        Task longestTask = Task.findLongestTask(tasksList);
-        assertNotNull(longestTask);
-        assertEquals("Glenda Oberholzer", longestTask.getDeveloperDetails());
-        assertEquals(11, longestTask.getTaskDuration());
+    void testCheckTaskDescriptionFailure() {
+        // Initialize with a description longer than 50 characters
+        String longDescription = "This description is definitely longer than fifty characters, and should fail validation";
+        
+        Task task = new Task("Long Task Name", 2, longDescription, "Mike Smith", 10, "Doing");
+        
+        // Test that the description is invalid
+        boolean isValid = task.checkTaskDescription(task.getTaskDescription());
+        assertFalse(isValid);  // Description exceeds 50 characters, so this should fail
     }
 
-    @Test
-    void testSearchTaskByName() {
-        Task task = Task.searchTaskByName(tasksList, "Create Login");
-        assertNotNull(task);
-        assertEquals("Mike Smith", task.getDeveloperDetails());
-        assertEquals("Create Login", task.getTaskName());
-    }
+
 
     @Test
-    void testSearchTasksByDeveloper() {
-        List<Task> developerTasks = new ArrayList<>();
-        for (Task task : tasksList) {
-            if (task.getDeveloperDetails().equals("Samantha Paulson")) {
-                developerTasks.add(task);
-            }
-        }
+    void testTaskIDGeneration() {
+    Task task1 = new Task("Login Feature", 1, "Short description", "Robyn Harrison", 8, "To Do");
+    assertEquals("LF:1:SON", task1.getTaskID(), "Task ID should match the expected format");
 
-        assertEquals(1, developerTasks.size());
-        assertEquals("Create Reports", developerTasks.get(0).getTaskName());
-    }
+    Task task2 = new Task("Add Task Feature", 2, "Short description", "Mike Smith", 10, "To Do");
+    assertEquals("AT:2:ITH", task2.getTaskID(), "Task ID should match the expected format");
+}
+
 
     @Test
-    void testDeleteTaskByName() {
-        boolean isDeleted = Task.deleteTaskByName(tasksList, "Create Reports");
-        assertTrue(isDeleted);
-        assertNull(Task.searchTaskByName(tasksList, "Create Reports"));
+    void testPrintTaskDetails() {
+        Task task = tasksList.get(0); // "Login Feature"
+        String expectedDetails = 
+                """
+                Task Status: To Do
+                Developer Details: Robyn Harrison
+                Task Number: 1
+                Task Name: Login Feature
+                Task Description: Create Login to authenticate users
+                Task ID: LF:1:SON
+                Task Duration: 8 hours
+                """;
+
+        // Simulate printTaskDetails output (adapt logic if the real method uses dialogs)
+        assertEquals(expectedDetails.trim(), task.printTaskDetails(), "Task details output is incorrect.");
     }
 
     @Test
     void testDisplayReport() {
-        String report = Task.displayReport(tasksList);
-        String expectedReport = 
+        String expectedReport =
                 """
                 Task Report:
-                Task Name: Create Login
-                Task ID: CR:1:ITH
-                Description: Implement user login feature
-                Developer: Mike Smith
-                Duration: 5 hours
-                Status: To Do
-                
-                Task Name: Add Security
-                Task ID: AD:2:TON
-                Description: Enhance app security
-                Developer: Edward Harrington
+                Task Name: Login Feature
+                Task ID: LF:1:SON
+                Description: Create Login to authenticate users
+                Developer: Robyn Harrison
                 Duration: 8 hours
+                Status: To Do
+
+                Task Name: Add Task Feature
+                Task ID: AT:2:ITH
+                Description: Create Add Task feature to add task users
+                Developer: Mike Smith
+                Duration: 10 hours
                 Status: Doing
-                
-                Task Name: Create Reports
-                Task ID: CR:3:SON
-                Description: Generate user reports
-                Developer: Samantha Paulson
-                Duration: 7 hours
-                Status: Done
-                
-                Task Name: Optimize Database
-                Task ID: OP:4:ZER
-                Description: Optimize database performance
-                Developer: Glenda Oberholzer
-                Duration: 11 hours
-                Status: Doing
-                
+
                 """;
 
-        assertEquals(expectedReport, report);
+        String actualReport = Task.displayReport(tasksList);
+        assertEquals(expectedReport.trim(), actualReport.trim(), "Task report output is incorrect.");
     }
+
+    @Test
+    void testFindLongestTask() {
+        Task longestTask = Task.findLongestTask(tasksList);
+        assertNotNull(longestTask, "Longest task should not be null.");
+        assertEquals("Add Task Feature", longestTask.getTaskName(), "Longest task name is incorrect.");
+        assertEquals(10, longestTask.getTaskDuration(), "Longest task duration is incorrect.");
+    }
+
+    @Test
+    void testSearchTaskByName() {
+        Task task = Task.searchTaskByName(tasksList, "Login Feature");
+        assertNotNull(task, "Task search result should not be null.");
+        assertEquals("Robyn Harrison", task.getDeveloperDetails(), "Developer details are incorrect.");
+        assertEquals("Login Feature", task.getTaskName(), "Task name is incorrect.");
+    }
+
+    @Test
+    void testDeleteTaskByName() {
+        boolean isDeleted = Task.deleteTaskByName(tasksList, "Add Task Feature");
+        assertTrue(isDeleted, "Task should be deleted.");
+        assertNull(Task.searchTaskByName(tasksList, "Add Task Feature"), "Deleted task should not be found.");
+    }
+
+    @Test
+    void testReturnTotalHours() {
+        // Clear the list of task durations before starting the test
+        Task.getAllTaskDurations().clear();
+
+        // Creating tasks
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do"));
+        tasks.add(new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing"));
+        tasks.add(new Task("Another Task", 3, "Some task description", "John Doe", 12, "Done"));
+        tasks.add(new Task("Final Task", 4, "Another task", "Jane Doe", 55, "In Progress"));
+        tasks.add(new Task("Quick Task", 5, "Quick task", "Robert Brown", 1, "Completed"));
+
+        // Calling the method to get total hours
+        int totalHours = Task.returnTotalHours();
+
+        // Asserting that the total hours is 86
+        assertEquals(86, totalHours);  // The expected total is 86 (8 + 10 + 12 + 55 + 1 = 86)
+    }
+
+
+
 }
