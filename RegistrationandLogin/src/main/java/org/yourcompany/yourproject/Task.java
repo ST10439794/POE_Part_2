@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public final class Task {
+
     private String taskName;
     private int taskNumber;
     private String taskDescription;
@@ -112,7 +113,51 @@ public final class Task {
     public String getTaskStatus() {
         return taskStatus;
     }
-    
+
+    public static void setAllDeveloperNames(List<String> allDeveloperNames) {
+        Task.allDeveloperNames = allDeveloperNames;
+    }
+
+    public static void setAllTaskNames(List<String> allTaskNames) {
+        Task.allTaskNames = allTaskNames;
+    }
+
+    public static void setAllTaskIDs(List<String> allTaskIDs) {
+        Task.allTaskIDs = allTaskIDs;
+    }
+
+    public static void setAllTaskDurations(List<Integer> allTaskDurations) {
+        Task.allTaskDurations = allTaskDurations;
+    }
+
+    public static void setAllTaskStatuses(List<String> allTaskStatuses) {
+        Task.allTaskStatuses = allTaskStatuses;
+    }
+
+    // Static method to get all developer names
+    public static List<String> getAllDeveloperNames() {
+        return allDeveloperNames;
+    }
+
+    // Static method to get all task names
+    public static List<String> getAllTaskNames() {
+        return allTaskNames;
+    }
+
+    // Static method to get all task IDs
+    public static List<String> getAllTaskIDs() {
+        return allTaskIDs;
+    }
+
+    // Static method to get all task durations
+    public static List<Integer> getAllTaskDurations() {
+        return allTaskDurations;
+    }
+
+    // Static method to get all task statuses
+    public static List<String> getAllTaskStatuses() {
+        return allTaskStatuses;
+    }
 
     // Static method to display the report of all tasks
     public static String displayReport(List<Task> tasks) {
@@ -176,32 +221,5 @@ public final class Task {
             total += duration;
         }
         return total;
-    }
-    
-    
-
-    // Static method to get all developer names
-    public static List<String> getAllDeveloperNames() {
-        return allDeveloperNames;
-    }
-
-    // Static method to get all task names
-    public static List<String> getAllTaskNames() {
-        return allTaskNames;
-    }
-
-    // Static method to get all task IDs
-    public static List<String> getAllTaskIDs() {
-        return allTaskIDs;
-    }
-
-    // Static method to get all task durations
-    public static List<Integer> getAllTaskDurations() {
-        return allTaskDurations;
-    }
-
-    // Static method to get all task statuses
-    public static List<String> getAllTaskStatuses() {
-        return allTaskStatuses;
     }
 }

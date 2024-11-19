@@ -1,4 +1,84 @@
 -------------------------------------------------------------------------------
 Test set: org.yourcompany.yourproject.TaskTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 23.931 s - in org.yourcompany.yourproject.TaskTest
+Tests run: 9, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 20.579 s <<< FAILURE! - in org.yourcompany.yourproject.TaskTest
+org.yourcompany.yourproject.TaskTest.testDisplayReport  Time elapsed: 2.078 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+expected: <Task Report:
+Task Name: Login Feature
+Task ID: LF:1:SON
+Description: Create Login to authenticate users
+Developer: Robyn Harrison
+Duration: 8 hours
+Status: To Do
+
+Task Name: Add Task Feature
+Task ID: AT:2:ITH
+Description: Create Add Task feature
+Developer: Mike Smith
+Duration: 10 hours
+Status: Doing
+
+Task Name: Another Task
+Task ID: AT:3:DOE
+Description: Some task description
+Developer: John Doe
+Duration: 12 hours
+Status: Done
+
+Task Name: Final Task
+Task ID: FT:4:DOE
+Description: Another task
+Developer: Jane Doe
+Duration: 55 hours
+Status: In Progress
+
+Task Name: Quick Task
+Task ID: QT:5:OWN
+Description: Quick task
+Developer: Robert Brown
+Duration: 1 hours
+Status: Completed
+> but was: <Task Report:
+Task Name: Login Feature
+Task ID: LF:1:SON
+Description: Create Login to authenticate users
+Developer: Robyn Harrison
+Duration: 8 hours
+Status: To Do
+
+Task Name: Add Task Feature
+Task ID: AT:2:ITH
+Description: Create Add Task feature to add task users
+Developer: Mike Smith
+Duration: 10 hours
+Status: Doing
+
+Task Name: Another Task
+Task ID: AT:3:DOE
+Description: Some task description
+Developer: John Doe
+Duration: 12 hours
+Status: Done
+
+Task Name: Final Task
+Task ID: FT:4:DOE
+Description: Another task
+Developer: Jane Doe
+Duration: 55 hours
+Status: In Progress
+
+Task Name: Quick Task
+Task ID: QT:5:OWN
+Description: Quick task
+Developer: Robert Brown
+Duration: 1 hours
+Status: Completed
+
+>
+	at org.yourcompany.yourproject.TaskTest.testDisplayReport(TaskTest.java:118)
+
+org.yourcompany.yourproject.TaskTest.testFindLongestTask  Time elapsed: 1.627 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Longest task name is incorrect. ==> expected: <Add Task Feature> but was: <Final Task>
+	at org.yourcompany.yourproject.TaskTest.testFindLongestTask(TaskTest.java:126)
+

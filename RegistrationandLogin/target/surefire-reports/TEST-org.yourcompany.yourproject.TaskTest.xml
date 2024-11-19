@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.yourcompany.yourproject.TaskTest" time="23.931" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.yourcompany.yourproject.TaskTest" time="20.579" tests="9" errors="0" skipped="0" failures="2">
   <properties>
     <property name="java.specification.version" value="22"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ZA"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-22\bin"/>
-    <property name="sun.java.command" value="C:\Users\reseg\AppData\Local\Temp\surefire623363747779252527\surefirebooter9369373756056626538.jar C:\Users\reseg\AppData\Local\Temp\surefire623363747779252527 2024-11-19T20-16-43_912-jvmRun1 surefire4116396594863423004tmp surefire_015023292606274905611tmp"/>
+    <property name="sun.java.command" value="C:\Users\reseg\AppData\Local\Temp\surefire15798592264989803762\surefirebooter16281786661525062428.jar C:\Users\reseg\AppData\Local\Temp\surefire15798592264989803762 2024-11-19T20-42-48_236-jvmRun1 surefire762548293759983080tmp surefire_01148543228568402747tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="TaskTest"/>
     <property name="surefire.test.class.path" value="C:\Users\reseg\OneDrive\Documents\POE-Part-1\POE_Part_1\RegistrationandLogin\target\test-classes;C:\Users\reseg\OneDrive\Documents\POE-Part-1\POE_Part_1\RegistrationandLogin\target\classes;C:\Users\reseg\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.0\junit-jupiter-api-5.9.0.jar;C:\Users\reseg\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\reseg\.m2\repository\org\junit\platform\junit-platform-commons\1.9.0\junit-platform-commons-1.9.0.jar;C:\Users\reseg\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\reseg\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.0\junit-jupiter-engine-5.9.0.jar;C:\Users\reseg\.m2\repository\org\junit\platform\junit-platform-engine\1.9.0\junit-platform-engine-1.9.0.jar;"/>
@@ -32,7 +32,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\reseg\AppData\Local\Temp\surefire623363747779252527\surefirebooter9369373756056626538.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\reseg\AppData\Local\Temp\surefire15798592264989803762\surefirebooter16281786661525062428.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="22.0.2+9-70"/>
@@ -60,13 +60,93 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="testDeleteTaskByName" classname="org.yourcompany.yourproject.TaskTest" time="1.878"/>
-  <testcase name="testReturnTotalHours" classname="org.yourcompany.yourproject.TaskTest" time="4.657"/>
-  <testcase name="testDisplayReport" classname="org.yourcompany.yourproject.TaskTest" time="2.27"/>
-  <testcase name="testCheckTaskDescriptionSuccess" classname="org.yourcompany.yourproject.TaskTest" time="4.133"/>
-  <testcase name="testFindLongestTask" classname="org.yourcompany.yourproject.TaskTest" time="1.463"/>
-  <testcase name="testPrintTaskDetails" classname="org.yourcompany.yourproject.TaskTest" time="2.07"/>
-  <testcase name="testCheckTaskDescriptionFailure" classname="org.yourcompany.yourproject.TaskTest" time="3.292"/>
-  <testcase name="testSearchTaskByName" classname="org.yourcompany.yourproject.TaskTest" time="1.623"/>
-  <testcase name="testTaskIDGeneration" classname="org.yourcompany.yourproject.TaskTest" time="2.483"/>
+  <testcase name="testDeleteTaskByName" classname="org.yourcompany.yourproject.TaskTest" time="2.883"/>
+  <testcase name="testReturnTotalHours" classname="org.yourcompany.yourproject.TaskTest" time="3.601"/>
+  <testcase name="testDisplayReport" classname="org.yourcompany.yourproject.TaskTest" time="2.078">
+    <failure type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: 
+expected: <Task Report:
+Task Name: Login Feature
+Task ID: LF:1:SON
+Description: Create Login to authenticate users
+Developer: Robyn Harrison
+Duration: 8 hours
+Status: To Do
+
+Task Name: Add Task Feature
+Task ID: AT:2:ITH
+Description: Create Add Task feature
+Developer: Mike Smith
+Duration: 10 hours
+Status: Doing
+
+Task Name: Another Task
+Task ID: AT:3:DOE
+Description: Some task description
+Developer: John Doe
+Duration: 12 hours
+Status: Done
+
+Task Name: Final Task
+Task ID: FT:4:DOE
+Description: Another task
+Developer: Jane Doe
+Duration: 55 hours
+Status: In Progress
+
+Task Name: Quick Task
+Task ID: QT:5:OWN
+Description: Quick task
+Developer: Robert Brown
+Duration: 1 hours
+Status: Completed
+> but was: <Task Report:
+Task Name: Login Feature
+Task ID: LF:1:SON
+Description: Create Login to authenticate users
+Developer: Robyn Harrison
+Duration: 8 hours
+Status: To Do
+
+Task Name: Add Task Feature
+Task ID: AT:2:ITH
+Description: Create Add Task feature to add task users
+Developer: Mike Smith
+Duration: 10 hours
+Status: Doing
+
+Task Name: Another Task
+Task ID: AT:3:DOE
+Description: Some task description
+Developer: John Doe
+Duration: 12 hours
+Status: Done
+
+Task Name: Final Task
+Task ID: FT:4:DOE
+Description: Another task
+Developer: Jane Doe
+Duration: 55 hours
+Status: In Progress
+
+Task Name: Quick Task
+Task ID: QT:5:OWN
+Description: Quick task
+Developer: Robert Brown
+Duration: 1 hours
+Status: Completed
+
+>
+	at org.yourcompany.yourproject.TaskTest.testDisplayReport(TaskTest.java:118)
+]]></failure>
+  </testcase>
+  <testcase name="testCheckTaskDescriptionSuccess" classname="org.yourcompany.yourproject.TaskTest" time="2.105"/>
+  <testcase name="testFindLongestTask" classname="org.yourcompany.yourproject.TaskTest" time="1.627">
+    <failure type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Longest task name is incorrect. ==> expected: <Add Task Feature> but was: <Final Task>
+	at org.yourcompany.yourproject.TaskTest.testFindLongestTask(TaskTest.java:126)
+]]></failure>
+  </testcase>
+  <testcase name="testPrintTaskDetails" classname="org.yourcompany.yourproject.TaskTest" time="2.021"/>
+  <testcase name="testCheckTaskDescriptionFailure" classname="org.yourcompany.yourproject.TaskTest" time="2.379"/>
+  <testcase name="testSearchTaskByName" classname="org.yourcompany.yourproject.TaskTest" time="1.558"/>
+  <testcase name="testTaskIDGeneration" classname="org.yourcompany.yourproject.TaskTest" time="2.257"/>
 </testsuite>

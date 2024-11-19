@@ -15,10 +15,13 @@ class TaskTest {
     private List<Task> tasksList;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         tasksList = new ArrayList<>();
         tasksList.add(new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do"));
         tasksList.add(new Task("Add Task Feature", 2, "Create Add Task feature", "Mike Smith", 10, "Doing"));
+        tasksList.add(new Task("Another Task", 3, "Some task description", "John Doe", 12, "Done"));
+        tasksList.add(new Task("Final Task", 4, "Another task", "Jane Doe", 55, "In Progress"));
+        tasksList.add(new Task("Quick Task", 5, "Quick task", "Robert Brown", 1, "Completed"));
     }
 
     @Test
@@ -73,7 +76,8 @@ class TaskTest {
     }
 
     @Test
-    void testDisplayReport() {
+    public void testDisplayReport() {
+        String report = Task.displayReport(tasksList);  // Assuming displayReport reads all tasks
         String expectedReport = """
                                 Task Report:
                                 Task Name: Login Feature
@@ -89,18 +93,39 @@ class TaskTest {
                                 Developer: Mike Smith
                                 Duration: 10 hours
                                 Status: Doing
+                                
+                                Task Name: Another Task
+                                Task ID: AT:3:DOE
+                                Description: Some task description
+                                Developer: John Doe
+                                Duration: 12 hours
+                                Status: Done
+                                
+                                Task Name: Final Task
+                                Task ID: FT:4:DOE
+                                Description: Another task
+                                Developer: Jane Doe
+                                Duration: 55 hours
+                                Status: In Progress
+                                
+                                Task Name: Quick Task
+                                Task ID: QT:5:OWN
+                                Description: Quick task
+                                Developer: Robert Brown
+                                Duration: 1 hours
+                                Status: Completed
+                                
                                 """;
-
-        String actualReport = Task.displayReport(tasksList);
-        assertEquals(expectedReport.trim(), actualReport.trim(), "Task report output is incorrect.");
+        assertEquals(expectedReport, report);
     }
+
 
     @Test
     void testFindLongestTask() {
         Task longestTask = Task.findLongestTask(tasksList);
         assertNotNull(longestTask, "Longest task should not be null.");
-        assertEquals("Add Task Feature", longestTask.getTaskName(), "Longest task name is incorrect.");
-        assertEquals(10, longestTask.getTaskDuration(), "Longest task duration is incorrect.");
+        assertEquals("Final Task", longestTask.getTaskName(), "Longest task name is correct.");
+        assertEquals(55, longestTask.getTaskDuration(), "Longest task duration is correct.");
     }
 
     @Test
@@ -124,12 +149,11 @@ class TaskTest {
         Task.getAllTaskDurations().clear();
 
         // Creating tasks
-        List<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do"));
-        tasks.add(new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing"));
-        tasks.add(new Task("Another Task", 3, "Some task description", "John Doe", 12, "Done"));
-        tasks.add(new Task("Final Task", 4, "Another task", "Jane Doe", 55, "In Progress"));
-        tasks.add(new Task("Quick Task", 5, "Quick task", "Robert Brown", 1, "Completed"));
+        tasksList.add(new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do"));
+        tasksList.add(new Task("Add Task Feature", 2, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing"));
+        tasksList.add(new Task("Another Task", 3, "Some task description", "John Doe", 12, "Done"));
+        tasksList.add(new Task("Final Task", 4, "Another task", "Jane Doe", 55, "In Progress"));
+        tasksList.add(new Task("Quick Task", 5, "Quick task", "Robert Brown", 1, "Completed"));
 
         // Calling the method to get total hours
         int totalHours = Task.returnTotalHours();
