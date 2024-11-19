@@ -8,10 +8,18 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TaskTest {
     private List<Task> tasksList;
+
+    @BeforeEach
+    void setUp() {
+        tasksList = new ArrayList<>();
+        tasksList.add(new Task("Login Feature", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do"));
+        tasksList.add(new Task("Add Task Feature", 2, "Create Add Task feature", "Mike Smith", 10, "Doing"));
+    }
 
     @Test
     void testCheckTaskDescriptionSuccess() {
@@ -66,24 +74,22 @@ class TaskTest {
 
     @Test
     void testDisplayReport() {
-        String expectedReport =
-                """
-                Task Report:
-                Task Name: Login Feature
-                Task ID: LF:1:SON
-                Description: Create Login to authenticate users
-                Developer: Robyn Harrison
-                Duration: 8 hours
-                Status: To Do
-
-                Task Name: Add Task Feature
-                Task ID: AT:2:ITH
-                Description: Create Add Task feature to add task users
-                Developer: Mike Smith
-                Duration: 10 hours
-                Status: Doing
-
-                """;
+        String expectedReport = """
+                                Task Report:
+                                Task Name: Login Feature
+                                Task ID: LF:1:SON
+                                Description: Create Login to authenticate users
+                                Developer: Robyn Harrison
+                                Duration: 8 hours
+                                Status: To Do
+                                
+                                Task Name: Add Task Feature
+                                Task ID: AT:2:ITH
+                                Description: Create Add Task feature
+                                Developer: Mike Smith
+                                Duration: 10 hours
+                                Status: Doing
+                                """;
 
         String actualReport = Task.displayReport(tasksList);
         assertEquals(expectedReport.trim(), actualReport.trim(), "Task report output is incorrect.");
