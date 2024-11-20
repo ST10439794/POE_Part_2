@@ -55,20 +55,26 @@ public final class Task {
     
 
     public String createTaskID() {
-        // Generate task prefix based on the first two letters of the task name.
-        String taskPrefix = taskName.substring(0, 1).toUpperCase(); // Get the first letter of the task name.
-        if (taskName.length() > 1 && taskName.contains(" ")) {
-            // Get the first letter of the second word (if available).
-            taskPrefix += taskName.substring(taskName.indexOf(" ") + 1, taskName.indexOf(" ") + 2).toUpperCase();
-        } else {
-            taskPrefix = taskPrefix.toUpperCase();
-        }
+        // Use the first two letters of the task name (or pad if shorter).
+        String taskPrefix = taskName.length() >= 2 
+            ? taskName.substring(0, 2).toUpperCase() 
+            : taskName.toUpperCase();
     
-        // Generate developer suffix using the last three characters of the developer's name.
-        String developerSuffix = developerDetails.length() > 2 ? developerDetails.substring(developerDetails.length() - 3).toUpperCase() : developerDetails.toUpperCase();
+        // Split the developer's name into first and last name.
+        String[] nameParts = developerDetails.split(" ");
+        String firstName = nameParts[0]; // Assume the first part is the first name.
     
+        // Use the last three letters of the developer's first name (or pad if shorter).
+        String developerSuffix = firstName.length() >= 3 
+            ? firstName.substring(firstName.length() - 3).toUpperCase() 
+            : firstName.toUpperCase();
+    
+        // Construct the Task ID in the specified format.
         return taskPrefix + ":" + taskNumber + ":" + developerSuffix;
     }
+    
+    
+    
     
     public String printTaskDetails() {
         String details = 
@@ -192,10 +198,14 @@ public final class Task {
     }
 
     public static boolean deleteTaskByName(List<Task> tasks, String name) {
-        for (Task task : tasks) {
-            if (task.getTaskName().equalsIgnoreCase(name)) {
-                tasks.remove(task);
-                return true;
+        if (tasks == null || name == null) {
+            return false; // Handle null inputs gracefully
+        }
+    
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getTaskName().equalsIgnoreCase(name)) {
+                tasks.remove(i); // Safely remove the task by index
+                return true;     // Task found and removed
             }
         }
         return false;
