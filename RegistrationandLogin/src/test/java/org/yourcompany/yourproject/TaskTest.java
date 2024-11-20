@@ -26,7 +26,7 @@ class TaskTest {
 
     @Test
     void testCheckTaskDescriptionSuccess() {
-        Task task = new Task("Create Login", 1, "Create Login to authenticate users", "Robyn Harrison", 8, "To Do");
+        Task task = new Task("Create Login", 1, "Create Login to authenticate users", "Mike Smith", 5, "To Do");
 
         // Test that the description is valid
         boolean isValid = task.checkTaskDescription(task.getTaskDescription());
@@ -38,7 +38,7 @@ class TaskTest {
         // Initialize with a description longer than 50 characters
         String longDescription = "This description is definitely longer than fifty characters, and should fail validation";
 
-        Task task = new Task("Long Task Name", 2, longDescription, "Mike Smith", 10, "Doing");
+        Task task = new Task("Long Task Name", 1, longDescription, "Mike Smith", 10, "To Do");
 
         // Test that the description is invalid
         boolean isValid = task.checkTaskDescription(task.getTaskDescription());
