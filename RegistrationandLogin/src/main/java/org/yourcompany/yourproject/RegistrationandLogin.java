@@ -26,7 +26,7 @@ public class RegistrationandLogin {
                 int option = Integer.parseInt(choice);
 
                 switch (option) {
-                    case 1:
+                    case 1 -> {
                         String name = JOptionPane.showInputDialog("Enter your name:");
                         if (name == null) break;
                         
@@ -40,9 +40,9 @@ public class RegistrationandLogin {
                         if (password == null) break;
 
                         JOptionPane.showMessageDialog(null, login.registerUser(name, lastName, username, password));
-                        break;
+                    }
 
-                    case 2:
+                    case 2 -> {
                         String enteredUsername = JOptionPane.showInputDialog("Enter your username:");
                         if (enteredUsername == null) break;
                         
@@ -50,17 +50,16 @@ public class RegistrationandLogin {
                         if (enteredPassword == null) break;
 
                         login.loginUser(enteredUsername, enteredPassword);
-                        break;
+                    }
 
-                    case 3:
+                    case 3 -> {
                         JOptionPane.showMessageDialog(null, "Login Status: " + (login.returnLoginStatus() ? "Logged in" : "Not logged in"));
                         if (login.returnLoginStatus()) {
                             app.displayKanbanMenu();
                         }
-                        break;
+                    }
 
-                    default:
-                        JOptionPane.showMessageDialog(null, "Invalid choice. Please try again.");
+                    default -> JOptionPane.showMessageDialog(null, "Invalid choice. Please try again.");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number from the menu.");
@@ -83,15 +82,11 @@ public class RegistrationandLogin {
                 int option = Integer.parseInt(choice);
 
                 switch (option) {
-                    case 1:
-                        manageTasks();
-                        break;
+                    case 1 -> manageTasks();
 
-                    case 2:
-                        Task.displayReport(tasksList);
-                        break;
+                    case 2 -> Task.displayReport(tasksList);
 
-                    case 3:
+                    case 3 -> {
                         String searchName = JOptionPane.showInputDialog("Enter the task name to search:");
                         if (searchName == null) break;
 
@@ -101,9 +96,9 @@ public class RegistrationandLogin {
                         } else {
                             JOptionPane.showMessageDialog(null, "Task not found.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
-                        break;
+                    }
 
-                    case 4:
+                    case 4 -> {
                         String deleteName = JOptionPane.showInputDialog("Enter the task name to delete:");
                         if (deleteName == null) break;
 
@@ -112,22 +107,22 @@ public class RegistrationandLogin {
                         } else {
                             JOptionPane.showMessageDialog(null, "Task not found.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
-                        break;
+                    }
 
-                    case 5:
+                    case 5 -> {
                         Task longestTask = Task.findLongestTask(tasksList);
                         if (longestTask != null) {
                             JOptionPane.showMessageDialog(null, "Longest Task:\n" + longestTask.getTaskID() + "\nDuration: " + longestTask.getTaskDuration() + " hours");
                         } else {
                             JOptionPane.showMessageDialog(null, "No tasks found.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
-                        break;
+                    }
 
-                    case 6:
+                    case 6 -> {
                         return;
+                    }
 
-                    default:
-                        JOptionPane.showMessageDialog(null, "Invalid choice. Please try again.");
+                    default -> JOptionPane.showMessageDialog(null, "Invalid choice. Please try again.");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number from the menu.");
