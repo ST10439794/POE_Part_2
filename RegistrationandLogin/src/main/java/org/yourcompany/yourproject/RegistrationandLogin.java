@@ -69,7 +69,7 @@ public class RegistrationandLogin {
 
     private void displayKanbanMenu() {
         while (true) {
-            String menu = "1. Add Task\n2. Show Report\n3. Search Task\n4. Delete Task\n5. Find Longest Task\n6. Return to Main Menu";
+            String menu = "1. Add Task\n2. Show Report\n3. Search Task By Name\n4. Search Task By Developer\n5. Delete Task\n6. Find Longest Task\n7. Return to Main Menu";
             String choice = JOptionPane.showInputDialog(null, menu, "Kanban Menu", JOptionPane.QUESTION_MESSAGE);
 
             // Handle Cancel button
@@ -99,6 +99,18 @@ public class RegistrationandLogin {
                     }
 
                     case 4 -> {
+                        String searchName = JOptionPane.showInputDialog("Enter the developer's name to search:");
+                        if (searchName == null) break;
+
+                        Task task1 = Task.searchTaskByDeveloperName(tasksList, searchName);
+                        if (task1 != null) {
+                            task1.printTaskDetails();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Task not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+
+                    case 5 -> {
                         String deleteName = JOptionPane.showInputDialog("Enter the task name to delete:");
                         if (deleteName == null) break;
 
@@ -109,7 +121,7 @@ public class RegistrationandLogin {
                         }
                     }
 
-                    case 5 -> {
+                    case 6 -> {
                         Task longestTask = Task.findLongestTask(tasksList);
                         if (longestTask != null) {
                             JOptionPane.showMessageDialog(null, "Longest Task:\n" + longestTask.getTaskID() + "\nDuration: " + longestTask.getTaskDuration() + " hours");
@@ -118,7 +130,7 @@ public class RegistrationandLogin {
                         }
                     }
 
-                    case 6 -> {
+                    case 7 -> {
                         return;
                     }
 

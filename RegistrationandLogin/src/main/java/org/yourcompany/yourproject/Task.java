@@ -197,6 +197,15 @@ public final class Task {
         return null;
     }
 
+    public static Task searchTaskByDeveloperName(List<Task> tasks, String developerName){
+        for (Task task : tasks) {
+            if (task.getDeveloperDetails().equalsIgnoreCase(developerName)) {
+                return task;
+            }
+        }
+        return null;
+    }
+
     public static boolean deleteTaskByName(List<Task> tasks, String name) {
         if (tasks == null || name == null) {
             return false; // Handle null inputs gracefully
