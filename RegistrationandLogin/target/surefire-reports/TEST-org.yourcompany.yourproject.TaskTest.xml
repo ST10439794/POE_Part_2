@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.yourcompany.yourproject.RegistrationandLoginTest" time="3.513" tests="8" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.yourcompany.yourproject.TaskTest" time="16.21" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="22"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -13,12 +13,12 @@
     <property name="user.timezone" value="Africa/Johannesburg"/>
     <property name="os.name" value="Windows 11"/>
     <property name="java.vm.specification.version" value="22"/>
-    <property name="user.country" value="ZA"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="ZA"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-22\bin"/>
-    <property name="sun.java.command" value="C:\Users\reseg\AppData\Local\Temp\surefire7054861091050980232\surefirebooter16768836443105300770.jar C:\Users\reseg\AppData\Local\Temp\surefire7054861091050980232 2024-11-20T10-38-48_493-jvmRun1 surefire8092603116139020332tmp surefire_08429231807997465046tmp"/>
+    <property name="sun.java.command" value="C:\Users\reseg\AppData\Local\Temp\surefire16966705635042933353\surefirebooter856331564845355606.jar C:\Users\reseg\AppData\Local\Temp\surefire16966705635042933353 2024-11-19T20-59-48_704-jvmRun1 surefire8848828716458694264tmp surefire_010805101168138496624tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="org.yourcompany.yourproject.RegistrationandLoginTest"/>
+    <property name="test" value="TaskTest"/>
     <property name="surefire.test.class.path" value="C:\Users\reseg\OneDrive\Documents\POE-Part-1\POE_Part_1\RegistrationandLogin\target\test-classes;C:\Users\reseg\OneDrive\Documents\POE-Part-1\POE_Part_1\RegistrationandLogin\target\classes;C:\Users\reseg\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.0\junit-jupiter-api-5.9.0.jar;C:\Users\reseg\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\reseg\.m2\repository\org\junit\platform\junit-platform-commons\1.9.0\junit-platform-commons-1.9.0.jar;C:\Users\reseg\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\reseg\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.0\junit-jupiter-engine-5.9.0.jar;C:\Users\reseg\.m2\repository\org\junit\platform\junit-platform-engine\1.9.0\junit-platform-engine-1.9.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\reseg"/>
@@ -32,7 +32,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\reseg\AppData\Local\Temp\surefire7054861091050980232\surefirebooter16768836443105300770.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\reseg\AppData\Local\Temp\surefire16966705635042933353\surefirebooter856331564845355606.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="22.0.2+9-70"/>
@@ -43,7 +43,6 @@
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="maven.ext.class.path" value="C:\Users\reseg\.vscode\extensions\oracle.oracle-java-23.0.0\nbcode\java\maven-nblib\netbeans-eventspy.jar"/>
     <property name="localRepository" value="C:\Users\reseg\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\reseg\AppData\Local\Temp\"/>
@@ -61,12 +60,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="testReturnLoginStatus" classname="org.yourcompany.yourproject.RegistrationandLoginTest" time="2.051"/>
-  <testcase name="testRegisterUserWithInvalidUsername" classname="org.yourcompany.yourproject.RegistrationandLoginTest" time="0.004"/>
-  <testcase name="testLoginUser" classname="org.yourcompany.yourproject.RegistrationandLoginTest" time="0.932"/>
-  <testcase name="testSuccessfulRegistration" classname="org.yourcompany.yourproject.RegistrationandLoginTest" time="0.003"/>
-  <testcase name="testCheckPasswordComplexity" classname="org.yourcompany.yourproject.RegistrationandLoginTest" time="0.002"/>
-  <testcase name="testRegisterUserWithInvalidPassword" classname="org.yourcompany.yourproject.RegistrationandLoginTest" time="0.002"/>
-  <testcase name="testCheckUsername" classname="org.yourcompany.yourproject.RegistrationandLoginTest" time="0.001"/>
-  <testcase name="testFailedLoginStatus" classname="org.yourcompany.yourproject.RegistrationandLoginTest" time="0.433"/>
+  <testcase name="testDeleteTaskByName" classname="org.yourcompany.yourproject.TaskTest" time="2.083"/>
+  <testcase name="testReturnTotalHours" classname="org.yourcompany.yourproject.TaskTest" time="2.51"/>
+  <testcase name="testDisplayReport" classname="org.yourcompany.yourproject.TaskTest" time="1.586"/>
+  <testcase name="testCheckTaskDescriptionSuccess" classname="org.yourcompany.yourproject.TaskTest" time="2.057"/>
+  <testcase name="testFindLongestTask" classname="org.yourcompany.yourproject.TaskTest" time="1.407"/>
+  <testcase name="testPrintTaskDetails" classname="org.yourcompany.yourproject.TaskTest" time="1.715"/>
+  <testcase name="testCheckTaskDescriptionFailure" classname="org.yourcompany.yourproject.TaskTest" time="1.971"/>
+  <testcase name="testSearchTaskByName" classname="org.yourcompany.yourproject.TaskTest" time="1.182"/>
+  <testcase name="testTaskIDGeneration" classname="org.yourcompany.yourproject.TaskTest" time="1.643"/>
 </testsuite>

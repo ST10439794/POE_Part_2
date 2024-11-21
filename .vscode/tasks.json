@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "runTestsOnSave",
+            "type": "shell",
+            "command": "mvn test", // or "./gradlew test" for Gradle
+            "group": "test",
+            "problemMatcher": [],
+            "isBackground": true
+        }
+    ]
+}
