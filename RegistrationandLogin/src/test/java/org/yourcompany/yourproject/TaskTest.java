@@ -24,9 +24,10 @@ class TaskTest {
         tasksList.add(new Task("Add Arrays", 4, "Add Arrays", "Glenda Oberholzer", 11, "To Do"));
     }
 
+//PART 2 TESTS
     @Test
     void testCheckTaskDescriptionSuccess() {
-        Task task = new Task("Create Login", 1, "Create Login to authenticate users", "Mike Smith", 5, "To Do");
+        Task task = tasksList.get(0);
 
         // Test that the description is valid
         boolean isValid = task.checkTaskDescription(task.getTaskDescription());
@@ -35,7 +36,6 @@ class TaskTest {
 
     @Test
     void testCheckTaskDescriptionFailure() {
-        // Initialize with a description longer than 50 characters
         String longDescription = "This description is definitely longer than fifty characters, and should fail validation";
 
         Task task = new Task("Long Task Name", 1, longDescription, "Mike Smith", 10, "To Do");
@@ -47,10 +47,10 @@ class TaskTest {
 
     @Test
     void testTaskIDGeneration() {
-        Task task1 = new Task("Create Login", 1, "Short description", "Mike Smith", 5, "To Do");
+        Task task1 = tasksList.get(0);
         assertEquals("CR:1:IKE", task1.getTaskID(), "Task ID should match the expected format");
 
-        Task task2 = new Task("Add Task Features", 2, "Short description", "Edward Harrison", 8, "Doing");
+        Task task2 = tasksList.get(1);
         assertEquals("AD:2:ARD", task2.getTaskID(), "Task ID should match the expected format");
     }
 
@@ -68,13 +68,32 @@ class TaskTest {
                 Task Duration: 5 hours
                 """;
 
-        // Simulate printTaskDetails output (adapt logic if the real method uses dialogs)
         assertEquals(expectedDetails.trim(), task.printTaskDetails(), "Task details output is incorrect.");
     }
 
     @Test
+    void testReturnTotalHours() {
+        // Clear the list of task durations before starting the test
+        Task.getAllTaskDurations().clear();
+
+        // Creating tasks
+        tasksList.add(new Task("Create Login", 1, "Create Login to authenticate users", "Mike Smith", 5, "To Do"));
+        tasksList.add(new Task("Create Add Feature", 2, "Create Add Task feature to add task users", "Edward Harrison", 8, "Doing"));
+        tasksList.add(new Task("Create Reports", 3, "Create Reports", "Samantha Paulson", 2, "Done"));
+        tasksList.add(new Task("Add Arrays", 4, "Add Arrays", "Glenda Oberholzer", 11, "To Do"));
+
+        // Calling the method to get total hours
+        int totalHours = Task.returnTotalHours();
+
+        // Asserting that the total hours is 86
+        assertEquals(26, totalHours);
+    }
+
+
+//PART 3 TESTS
+    @Test
     public void testDisplayReport() {
-        String report = Task.displayReport(tasksList);  // Assuming displayReport reads all tasks
+        String report = Task.displayReport(tasksList);
         String expectedReport = """
                                 Task Report:
                                 Task Name: Create Login
@@ -131,23 +150,4 @@ class TaskTest {
         assertTrue(isDeleted, "Task should be deleted.");
         assertNull(Task.searchTaskByName(tasksList, "Create Login"), "Deleted task should not be found.");
     }
-
-    @Test
-    void testReturnTotalHours() {
-        // Clear the list of task durations before starting the test
-        Task.getAllTaskDurations().clear();
-
-        // Creating tasks
-        tasksList.add(new Task("Create Login", 1, "Create Login to authenticate users", "Mike Smith", 5, "To Do"));
-        tasksList.add(new Task("Create Add Feature", 2, "Create Add Task feature to add task users", "Edward Harrison", 8, "Doing"));
-        tasksList.add(new Task("Create Reports", 3, "Create Reports", "Samantha Paulson", 2, "Done"));
-        tasksList.add(new Task("Add Arrays", 4, "Add Arrays", "Glenda Oberholzer", 11, "To Do"));
-
-        // Calling the method to get total hours
-        int totalHours = Task.returnTotalHours();
-
-        // Asserting that the total hours is 86
-        assertEquals(26, totalHours);
-    }
-
 }
