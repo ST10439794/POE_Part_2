@@ -129,7 +129,6 @@ public class RegistrationandLogin {
                             JOptionPane.showMessageDialog(null, "No tasks found.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
-
                     case 7 -> {
                         return;
                     }

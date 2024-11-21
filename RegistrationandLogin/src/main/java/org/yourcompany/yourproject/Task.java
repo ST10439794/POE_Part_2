@@ -52,8 +52,6 @@ public final class Task {
         return true;
     }
     
-    
-
     public String createTaskID() {
         // Use the first two letters of the task name (or pad if shorter).
         String taskPrefix = taskName.length() >= 2 
@@ -72,9 +70,6 @@ public final class Task {
         // Construct the Task ID in the specified format.
         return taskPrefix + ":" + taskNumber + ":" + developerSuffix;
     }
-    
-    
-    
     
     public String printTaskDetails() {
         String details = 
@@ -187,7 +182,6 @@ public final class Task {
     }
     
     
-
     public static Task searchTaskByName(List<Task> tasks, String name) {
         for (Task task : tasks) {
             if (task.getTaskName().equalsIgnoreCase(name)) {

@@ -24,7 +24,7 @@ class TaskTest {
         tasksList.add(new Task("Add Arrays", 4, "Add Arrays", "Glenda Oberholzer", 11, "To Do"));
     }
 
-//PART 2 TESTS
+    //PART 2 TESTS
     @Test
     void testCheckTaskDescriptionSuccess() {
         Task task = tasksList.get(0);
@@ -57,8 +57,8 @@ class TaskTest {
     @Test
     void testPrintTaskDetails() {
         Task task = tasksList.get(0); // "Login Feature"
-        String expectedDetails
-                = """
+        String expectedDetails = 
+                  """
                 Task Status: To Do
                 Developer Details: Mike Smith
                 Task Number: 1
@@ -90,7 +90,7 @@ class TaskTest {
     }
 
 
-//PART 3 TESTS
+    //PART 3 TESTS
     @Test
     public void testDisplayReport() {
         String report = Task.displayReport(tasksList);
